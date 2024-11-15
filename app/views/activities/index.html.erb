@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <h1>All Available Activities</h1>
+    <div class="col">
+      <% @activities.each do |activity| %>
+        <h2><%= activity.title %></h2>
+        <ul>
+          <li><%= activity.description %></li>
+          <li><%= activity.location %></li>
+          <li><%= activity.start %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
