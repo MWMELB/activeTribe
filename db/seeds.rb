@@ -20,15 +20,16 @@ end
 
 puts "Creating 5 activities..."
 users = User.all
+melb_locations = ["Carlton", "Melbourne", "South Yarra", "Fitzroy", "Southbank"]
 5.times do
   activity_owner = users.sample
   activity_type = Faker::Sport.sport(include_unusual: true)
-  activity_location = Faker::Locations::Australia.location
+  activity_location = melb_locations.sample
   Activity.create(
     user: activity_owner,
     title: "#{activity_type} with #{activity_owner.first_name}",
     sport: activity_type,
-    description: "Join us at #{activity_location} for #{activity_type}",
+    description: "Join us in #{activity_location} for #{activity_type}",
     location: activity_location,
     start: Faker::Time.between_dates(from: Date.today + 1, to: Date.today + 7, period: :morning),
     duration: rand(8) * 15,
