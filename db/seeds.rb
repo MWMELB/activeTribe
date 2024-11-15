@@ -20,7 +20,7 @@ end
 
 puts "Creating 5 activities..."
 users = User.all
-melb_locations = ["Carlton", "Melbourne", "South Yarra", "Fitzroy", "Southbank"]
+melb_locations = ["640 Swanston St, Carlton, Australia"]
 5.times do
   activity_owner = users.sample
   activity_type = Faker::Sport.sport(include_unusual: true)
@@ -31,7 +31,7 @@ melb_locations = ["Carlton", "Melbourne", "South Yarra", "Fitzroy", "Southbank"]
     sport: activity_type,
     description: "Join us in #{activity_location} for #{activity_type}",
     location: activity_location,
-    start: Faker::Time.between_dates(from: Date.today + 1, to: Date.today + 7, period: :morning),
+    start: (Faker::Time.between_dates(from: Date.today + 1, to: Date.today + 7, period: :evening)).beginning_of_hour,
     duration: rand(8) * 15,
     price: rand(0..20) * 5
   )

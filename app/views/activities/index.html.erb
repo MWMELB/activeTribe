@@ -1,0 +1,17 @@
+<div class="container my-4">
+  <div class="row">
+    <h1>All Available Activities</h1>
+    <div class="col">
+      <% @activities.each do |activity| %>
+        <h2><%= link_to activity.title, activity_path(activity) %></h2>
+        <ul>
+          <li><%= activity.location %></li>
+          <%# <li><%= "#{activity.start.mday} #{Date::MONTHNAMES[activity.start.mon]} #{activity.start.year} at #{activity.start.to_fs(:time)}" %>
+          <li><%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
+          <li><%= format_duration(activity.duration) %></li>
+          <li>$<%= activity.price %></li>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
