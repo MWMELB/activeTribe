@@ -1,0 +1,18 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <h1>Create a new activity</h1>
+      <%= simple_form_for @activity do |f| %>
+        <%= f.input :title %>
+        <%= f.input :description %>
+        <%= f.input :location %>
+        <%= f.input :sport %>
+        <%= f.input :photo %>
+        <%= f.input :start %>
+        <%= f.input :duration %>
+        <%= f.input :price %>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -2,12 +2,17 @@
   <div class="row">
     <h1><%= @activity.title %></h1>
     <div class="col">
+      <div style="width: 100%; height: 600px;"
+        data-controller="map"
+        data-map-markers-value="<%= @marker.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
       <ul>
         <li>Organised by <%= @activity.user.first_name %></li>
         <li><%= @activity.description %></li>
         <li><%= @activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
         <li><%= format_duration(@activity.duration) %></li>
         <li>$<%= @activity.price %></li>
+        <li><%= @activity.location.split(',')[0] %></li>
       </ul>
 
     </div>
