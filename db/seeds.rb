@@ -20,7 +20,7 @@ end
 
 puts "Creating 5 activities..."
 users = User.all
-melb_locations = ["Carlton", "Melbourne", "South Yarra", "Fitzroy", "Southbank"]
+melb_locations = ["640 Swanston St, Carlton, Australia"]
 5.times do
   activity_owner = users.sample
   activity_type = Faker::Sport.sport(include_unusual: true)
