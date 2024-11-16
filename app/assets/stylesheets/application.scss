@@ -12,3 +12,59 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+@import "components/statusbar";
+@import "components/_footer";
+
+body {
+  background-color: white;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.login-form, .signup-form {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.form-input {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.btn-dark {
+  background-color: #000;
+  border-radius: 25px;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-dark:hover {
+  background-color: #333;
+}
+
+.link-primary {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link-primary:hover {
+  text-decoration: underline;
+}
