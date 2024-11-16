@@ -30,6 +30,10 @@
         <!-- Back to Activities Button -->
         <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary me-2" %>
 
+        <% if @activity.user != current_user %>
+          <%= button_to "Book Now", activity_bookings_path(@activity), method: :post, class: "btn btn-success ms-2" %>
+        <% end %>
+
         <!-- Edit Activity Button (Only visible to the creator) -->
         <% if @activity.user == current_user %>
           <%= link_to "Edit Activity", edit_activity_path(@activity), class: "btn btn-primary ms-2" %>

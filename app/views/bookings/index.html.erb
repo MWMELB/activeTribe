@@ -1,0 +1,29 @@
+<div class="container my-5">
+  <h2 class="text-center mb-5">My Bookings</h2>
+
+  <% if @bookings.any? %>
+    <% @bookings.each do |booking| %>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5><%= link_to booking.activity.title, activity_path(booking.activity) %></h5>
+          <p><strong>Date:</strong> <%= booking.activity.start.strftime("%A, %d %b %Y %l:%M %p") %></p>
+          <p><strong>Location:</strong> <%= booking.activity.location %></p>
+          <p><strong>Status:</strong> <%= booking.status.capitalize %></p>
+
+          <% if booking.status == "Pending" %>
+            <!-- Form to Cancel Booking -->
+            <div class="mt-3">
+              <%= form_with url: booking_path(booking), method: :delete, local: true, data: { turbo_confirm: "Are you sure you want to cancel this booking?" } do %>
+                <button type="submit" class="btn btn-danger">
+                  Cancel Booking
+                </button>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center">You have no bookings yet.</p>
+  <% end %>
+</div>
