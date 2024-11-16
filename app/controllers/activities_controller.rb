@@ -45,13 +45,13 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    @activity = Activity.find(params[:id])
-    if current_user.activity_owner?
+    if @activity.user == current_user
       @activity.destroy
-      redirect_to activities_path, notice: "Activity deleted successfully."
+      flash[:notice] = "Activity was successfully deleted."
     else
       redirect_to root_path, status: :unprocessable_entity
     end
+    redirect_to activities_path
   end
 
   private
