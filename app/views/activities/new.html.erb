@@ -1,0 +1,46 @@
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="activity-form p-4 shadow-sm rounded">
+        <h2 class="text-center mb-5">Create a New Activity</h2>
+
+        <%= form_with model: @activity, local: true do |form| %>
+          <!-- Activity Name -->
+          <div class="mb-4">
+            <%= form.label :name, "Activity Name", class: "form-label" %>
+            <%= form.text_field :name, class: "form-control form-input", placeholder: "Enter activity name" %>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-4">
+            <%= form.label :description, "Description", class: "form-label" %>
+            <%= form.text_area :description, rows: 4, class: "form-control form-input", placeholder: "Enter activity description" %>
+          </div>
+
+          <!-- Category -->
+          <div class="mb-4">
+            <%= form.label :category, "Category", class: "form-label" %>
+            <%= form.text_field :category, class: "form-control form-input", placeholder: "Enter category" %>
+          </div>
+
+          <!-- Date -->
+          <div class="mb-4">
+            <%= form.label :date, "Date", class: "form-label" %>
+            <%= form.date_field :date, class: "form-control form-input" %>
+          </div>
+
+          <!-- Duration -->
+          <div class="mb-4">
+            <%= form.label :duration, "Duration (minutes)", class: "form-label" %>
+            <%= form.number_field :duration, class: "form-control form-input", placeholder: "Enter duration" %>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid">
+            <%= form.submit "Create Activity", class: "btn btn-dark btn-lg w-100" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
