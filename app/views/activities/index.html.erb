@@ -8,8 +8,6 @@
         <div class="card shadow-sm p-4 activity-card">
           <!-- Activity Title -->
           <h2 class="card-title text-dark mb-3"><%= link_to activity.title, activity_path(activity), class: "text-decoration-none text-dark" %></h2>
-
-          <!-- Activity Details -->
           <ul class="list-unstyled">
             <li><strong>Location:</strong> <%= activity.location %></li>
             <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
