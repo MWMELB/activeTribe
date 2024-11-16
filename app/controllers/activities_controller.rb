@@ -1,4 +1,5 @@
 class ActivitiesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
   def index
     @activities = Activity.all
@@ -12,13 +13,14 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = Activity.new(activity_params)
+    @activity = current_user.activities.build(activity_params)
+    @activity.user = current_user
     if @activity.save
       flash[:notice] = "Activity created successfully!"
       redirect_to @activity
     else
       flash.now[:alert] = "There was an error creating the activity."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +48,7 @@ class ActivitiesController < ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :category, :date, :duration)
+    params.require(:activity).permit(:title, :description, :category, :start, :duration, :price, :location, :sport)
   end
 
   def set_activity
