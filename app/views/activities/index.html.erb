@@ -1,23 +1,25 @@
-<div class="container my-5">
-  <h1 class="text-center mb-5">All Available Activities</h1>
+<div class="container my-5 px-4">
+  <h1 class="text-center mb-3">All Available Activities</h1>
 
   <div class="row justify-content-center">
     <% @activities.each do |activity| %>
       <div class="col-12 col-md-6 col-lg-4 mb-4">
         <!-- Activity Card -->
-        <div class="card shadow-sm p-4 activity-card">
+        <div class="card shadow-sm activity-card">
           <!-- Activity Title -->
-          <h2 class="card-title text-dark mb-3"><%= link_to activity.title, activity_path(activity), class: "text-decoration-none text-dark" %></h2>
-          <ul class="list-unstyled">
-            <li><strong>Location:</strong> <%= activity.location %></li>
-            <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
-            <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
-            <li><strong>Price:</strong> $<%= activity.price %></li>
-          </ul>
+          <div class="card-body">
+            <h2 class="card-title"><%= link_to activity.title, activity_path(activity)%></h2>
+            <ul class="list-unstyled">
+              <li><strong>Location:</strong> <%= activity.location %></li>
+              <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
+              <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
+              <li><strong>Price:</strong> $<%= activity.price %></li>
+            </ul>
 
-          <!-- View Details Button -->
-          <div class="d-grid mt-4">
-            <%= link_to "View Details", activity_path(activity), class: "btn btn-dark btn-lg w-100" %>
+            <!-- View Details Button -->
+            <%# <div class="d-grid mt-4"> %>
+            <%= link_to "View Details", activity_path(activity), class: "btn btn-dark w-100" %>
+            <%# </div> %>
           </div>
         </div>
       </div>
