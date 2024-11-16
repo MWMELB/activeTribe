@@ -25,13 +25,22 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
+    @activity = Activity.find(params[:id])
+    redirect_to activities_path, alert: "You can't edit this activity" unless @activity.user == current_user
   end
 
   def update
-    if @activity.update(activity_params)
-      redirect_to @activity, notice: "Activity updated successfully!"
+    @activity = Activity.find(params[:id])
+    if @activity.user == current_user
+      if @activity.update(activity_params)
+        flash[:notice] = "Activity updated successfully!"
+        redirect_to @activity
+      else
+        flash.now[:alert] = "There was an error updating the activity."
+        render :edit, status: :unprocessable_entity
+      end
     else
-      render :edit
+      redirect_to activities_path, alert: "You can't edit this activity"
     end
   end
 

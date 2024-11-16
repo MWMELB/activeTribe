@@ -25,9 +25,15 @@
         </div>
       </div>
 
-      <!-- Back Button -->
-      <div class="text-center mt-4">
-        <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary" %>
+      <!-- Action Buttons -->
+      <div class="text-center mt-4 d-flex justify-content-between">
+        <!-- Back to Activities Button -->
+        <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary me-2" %>
+
+        <!-- Edit Activity Button (Only visible to the creator) -->
+        <% if @activity.user == current_user %>
+          <%= link_to "Edit Activity", edit_activity_path(@activity), class: "btn btn-primary ms-2" %>
+        <% end %>
       </div>
     </div>
   </div>
