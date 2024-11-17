@@ -21,15 +21,17 @@ end
 puts "Creating 5 activities..."
 users = User.all
 melb_locations = ["Carlton, Victoria", "Southbank, Victoria", "Melbourne, Victoria", "Docklands, Victoria", "Fitzroy, Victoria"]
+activity_capacity = [10, 20, 30, 50, 100]
+
 5.times do
   activity_owner = users.sample
-  activity_type = Faker::Sport.sport(include_unusual: true)
+  activity_category = Faker::Sport.sport(include_unusual: true)
   activity_location = melb_locations.sample
   Activity.create(
     user: activity_owner,
     # Can change the title/description
     title: "#{activity_type} with #{activity_owner.first_name}",
-    sport: activity_type,
+    category: activity_category,
     description: "Join us in #{activity_location} for #{activity_type}",
     location: activity_location,
     # Start time this upcoming week
@@ -38,7 +40,9 @@ melb_locations = ["Carlton, Victoria", "Southbank, Victoria", "Melbourne, Victor
     # Duration range from 15min to 2hrs
     duration: rand(1..8) * 15,
     # Price range from free to $100
-    price: rand(0..20) * 5
+    price: rand(0..20) * 5,
+    # Capacity range from 10 to unlimited
+    capacity: activity_capacity.sample
   )
 end
 

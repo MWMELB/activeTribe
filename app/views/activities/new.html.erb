@@ -1,17 +1,35 @@
-<div class="container py-4">
+<div class="container p-4">
   <div class="row justify-content-center">
-    <div class="col-6">
+    <%# <div class="col-6"> %>
       <h1>Create a new activity</h1>
       <%= simple_form_for @activity do |f| %>
-        <%= f.input :title %>
-        <%= f.input :description %>
-        <%= f.input :location %>
-        <%= f.input :sport %>
-        <%= f.input :photo %>
-        <%= f.input :start %>
-        <%= f.input :duration %>
-        <%= f.input :price %>
-        <%= f.button :submit %>
+        <div class="activity-box p-3 my-3">
+          <h3>Event overview</h3>
+          <%= f.input :title,
+                      label: "Activity Title",
+                      placeholder: "Enter title" %>
+          <%= f.input :category,
+                      label: "Activity Type",
+                      placeholder: "Enter type" %>
+          <%= f.input :description,
+                      placeholder: "Enter description" %>
+          <%= f.input :price %>
+          <%= f.input :capacity, step: "10" %>
+        </div>
+        <div class="activity-box p-3">
+          <%= f.input :start,
+                      label: "Date and time" %>
+          <%= f.input :duration,
+                      label: "Duration (minutes)",
+                      placeholder: "Enter duration" %>
+          <%= f.input :location,
+                      placeholder: "Enter location" %>
+        </div>
+        <%# need to fix this! to attach a photo %>
+        <div class="activity-box p-3 my-3">
+          <%= f.input :photo %>
+        </div>
+        <%= f.button :submit, class: "btn btn-dark w-100" %>
       <% end %>
 <div class="container my-5">
   <div class="row justify-content-center">
@@ -39,7 +57,7 @@
 
           <!-- Sport (New Field) -->
           <div class="mb-4">
-            <%= form.label :sport, "Sport", class: "form-label" %>
+            <%= form.label :category, "Sport", class: "form-label" %>
             <%= form.text_field :sport, class: "form-control form-input", placeholder: "Enter sport" %>
           </div>
 
@@ -80,4 +98,4 @@
       </div>
     </div>
   </div>
-</div>
+<%# </div> %>
