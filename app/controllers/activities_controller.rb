@@ -1,11 +1,16 @@
 class ActivitiesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+
   def index
     @activities = Activity.all
   end
 
   def show
+    @marker = {
+      lat: @activity.latitude,
+      lng: @activity.longitude
+    }
   end
 
   def new
@@ -65,5 +70,9 @@ class ActivitiesController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "Activity not found."
     redirect_to activities_path
+  end
+
+  def activity_params
+    params.require(:activity).permit(:title, :photo, :description, :location, :price, :start, :duration, :sport)
   end
 end
