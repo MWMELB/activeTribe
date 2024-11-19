@@ -1,34 +1,32 @@
-<div class="container mt-5 my-5 px-4 mb-5">
-  <h1 class="text-center mb-3"><%= @activity.title %></h1>
+<div class="container my-5 px-4 pb-4">
   <div class="row justify-content-center">
-    <% if @activity.photo.attached? %>
-      <%= image_tag @activity.photo, class: "w-50" %>
-    <% else %>
-      <p>No photo available</p>
-    <% end %>
-  </div>
+    <div class="col">
+      <h1 class="text-center mb-3"><%= @activity.title %></h1>
+      <div>
+        <% if @activity.photo.attached? %>
+          <%= image_tag @activity.photo, class: "w-50" %>
+        <% else %>
+          <p>No photo available</p>
+        <% end %>
+      </div>
 
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8">
       <div class="card shadow-sm">
         <div class="card-body">
           <p class="card-text"><strong>Organized by:</strong> <%= @activity.user.first_name %></p>
           <h5 class="card-text">Description</h5>
           <p class="card-text"><%= @activity.description %></p>
-
           <hr>
-
           <ul class="list-unstyled">
             <li><strong>Date & Time:</strong> <%= @activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
             <li><strong>Duration:</strong> <%= format_duration(@activity.duration) %></li>
-            <li><strong>Price:</strong> $<%= @activity.price %></li>
+            <li><strong>Price:</strong> <%= format_price(@activity.price) %></li>
           </ul>
         </div>
       </div>
-      <div class="mt-4 d-flex justify-content-between">
+
+      <div class="d-flex justify-content-between mt-4 show-buttons">
         <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary me-2" %>
         <div>
-          <%# should really be - if policy(@booking).create? %>
           <% if policy(@activity).edit? %>
             <div class="d-flex pt-2">
               <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_activity_path(@activity), class: "px-3" %>
@@ -43,4 +41,6 @@
       </div>
     </div>
   </div>
+
 </div>
+  <%# </div> %>

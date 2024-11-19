@@ -1,4 +1,4 @@
-<div class="container mt-4 p-4">
+<div class="container my-5 px-4 pb-4">
   <div class="row justify-content-center">
     <h1>Start your own adventure!</h1>
     <% if @activity.errors.any? %>
@@ -35,11 +35,11 @@
                     placeholder: "Enter location" %>
       </div>
 
-        <div class="activity-box p-3 my-3">
-          <%= f.input :photo, as: :file, label: "Upload a Photo" %>
-        </div>
+      <div class="activity-box p-3 my-3">
+        <%= f.input :photo, as: :file, label: "Upload a Photo" %>
+      </div>
 
-        <%= f.button :submit, class: "btn btn-dark w-100 mb-5" %>
-      <% end %>
-</div>
+      <%= f.button :submit, class: "btn btn-dark w-100 mb-5" %>
+    <% end %>
+  </div>
 </div>
