@@ -34,6 +34,13 @@ class BookingsController < ApplicationController
     redirect_to bookings_path
   end
 
+  def booking_requests
+    @booking_requests = Booking.joins(:activity).where(activities: { user: current_user })
+    @booking_requests.each do |booking_request|
+      authorize booking_request, :owner?
+    end
+  end
+
   private
 
   def set_activity

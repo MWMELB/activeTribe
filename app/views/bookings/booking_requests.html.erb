@@ -1,0 +1,18 @@
+<div class="container my-5 px-4 pb-4">
+  <div class="row">
+    <div class="col">
+      <h1>Booking requests</h1>
+      <% if @booking_requests.empty? %>
+        You have no booking requests
+      <% else %>
+        <% @booking_requests.each do |booking_request| %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <%= booking_request.user.first_name %> has requested to join your activity <strong><%= booking_request.activity.title %></strong>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

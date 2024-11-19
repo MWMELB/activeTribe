@@ -7,7 +7,6 @@ class ActivitiesController < ApplicationController
   end
 
   def show
-    authorize @activity
     @marker = {
       lat: @activity.latitude,
       lng: @activity.longitude
@@ -34,12 +33,10 @@ class ActivitiesController < ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
-    authorize @activity
   end
 
   def update
     @activity = Activity.find(params[:id])
-    authorize @activity
     if @activity.update(activity_params)
       flash[:notice] = "Activity updated successfully!"
       redirect_to @activity
@@ -50,7 +47,6 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    authorize @activity
     if @activity.destroy
       flash[:notice] = "Activity was successfully deleted."
     else
@@ -67,6 +63,7 @@ class ActivitiesController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:id])
+    authorize @activity
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "Activity not found."
     redirect_to activities_path
