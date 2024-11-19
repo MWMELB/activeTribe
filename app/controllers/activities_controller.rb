@@ -18,7 +18,6 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = current_user.activities.build(activity_params)
     @activity.user = current_user
     if @activity.save
       flash[:notice] = "Activity created successfully!"
