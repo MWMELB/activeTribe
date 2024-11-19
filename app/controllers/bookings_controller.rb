@@ -56,6 +56,16 @@ class BookingsController < ApplicationController
     end
   end
 
+  def decline
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    if @booking.update(status: 2)
+      redirect_to booking_requests_bookings_path, notice: "Booking declined successfully."
+    else
+      redirect_to booking_requests_bookings_path, alert: "Failed to decline the booking."
+    end
+  end
+
   private
 
   def set_activity

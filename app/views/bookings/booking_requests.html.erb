@@ -10,10 +10,15 @@
         <% @booking_requests.each do |booking_request| %>
           <div class="card mb-3">
             <div class="card-body">
-              <% if booking_request.status == :Pending %>
-                <%= link_to "Accept", accept_booking_path(booking_request),  data: { turbo_method: :patch, turbo_confirm: "Are you sure you want to accept this booking?" } %>
+              <%# don't understand why this is now a string %>
+              <% if booking_request.status == "Pending" %>
+                <%= booking_request.user.first_name %> has requested to join the <strong><%= booking_request.activity.title %></strong>
+                <%= link_to "Accept", accept_booking_path(booking_request), data: { turbo_method: :patch, turbo_confirm: "Are you sure you want to accept this booking?" } %>
+                <%= link_to "Decline", decline_booking_path(booking_request), data: { turbo_method: :patch, turbo_confirm: "Are you sure you want to decline this booking?" } %>
               <% elsif booking_request.status == "Accepted" %>
-                <%= booking_request.user.first_name %> has requested to join your activity <strong><%= booking_request.activity.title %>. you have <%=booking_request.status %></strong>
+                <%= booking_request.user.first_name %> has joined activity <strong><%= booking_request.activity.title %></strong>
+              <% elsif booking_request.status == "Declined" %>
+                <%= booking_request.user.first_name %> has been declined from <strong><%= booking_request.activity.title %></strong>
               <% end %>
             </div>
           </div>

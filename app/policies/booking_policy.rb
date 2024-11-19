@@ -25,6 +25,9 @@ class BookingPolicy < ApplicationPolicy
     owner?
   end
 
+  def decline?
+    owner?
+  end
 
   class Scope < ApplicationPolicy::Scope
     def resolve
