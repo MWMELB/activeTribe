@@ -15,53 +15,7 @@
           </div>
         <% end %>
 
-        <%= form_with model: @activity, local: true do |form| %>
-          <!-- Activity Title -->
-          <div class="mb-4">
-            <%= form.label :title, "Activity Title", class: "form-label" %>
-            <%= form.text_field :title, class: "form-control form-input" %>
-          </div>
-
-          <!-- Sport -->
-          <div class="mb-4">
-            <%= form.label :sport, "Sport", class: "form-label" %>
-            <%= form.text_field :sport, class: "form-control form-input" %>
-          </div>
-
-          <!-- Description -->
-          <div class="mb-4">
-            <%= form.label :description, "Description", class: "form-label" %>
-            <%= form.text_area :description, rows: 4, class: "form-control form-input" %>
-          </div>
-
-          <!-- Location -->
-          <div class="mb-4">
-            <%= form.label :location, "Location", class: "form-label" %>
-            <%= form.text_field :location, class: "form-control form-input" %>
-          </div>
-
-          <!-- Date -->
-          <div class="mb-4">
-            <%= form.label :start, "Date", class: "form-label" %>
-            <%= form.date_field :start, class: "form-control form-input" %>
-          </div>
-
-          <!-- Duration -->
-          <div class="mb-4">
-            <%= form.label :duration, "Duration (minutes)", class: "form-label" %>
-            <%= form.number_field :duration, class: "form-control form-input" %>
-          </div>
-
-          <!-- Price -->
-          <div class="mb-4">
-            <%= form.label :price, "Price", class: "form-label" %>
-            <%= form.number_field :price, class: "form-control form-input" %>
-          </div>
-
-          <div class="d-grid">
-            <%= form.submit "Update Activity", class: "btn btn-dark btn-lg w-100" %>
-          </div>
-        <% end %>
+        <%= render "form", activity: @activity %>
 
         <div class="text-center mt-4">
           <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary" %>
