@@ -38,6 +38,8 @@
               <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_activity_path(@activity), class: "px-3" %>
               <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, @activity, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this activity?" } %>
             </div>
+          <% elsif Booking.find_by(activity: @activity, user: current_user) %>
+            <%= link_to "See my booking", bookings_path %>
           <% else %>
             <%= button_to "Book Now", activity_bookings_path(@activity), method: :post, class: "btn btn-success" %>
           <% end %>

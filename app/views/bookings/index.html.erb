@@ -12,7 +12,7 @@
           </div>
           <div id="cancel-booking">
             <% if booking.status == "Pending" %>
-              <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, @booking, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this booking?" } %>
+              <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, booking, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this booking?" } %>
             <% end %>
           </div>
         </div>

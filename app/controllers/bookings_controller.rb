@@ -8,8 +8,6 @@ class BookingsController < ApplicationController
   end
 
   def create
-    # @activity = Activity.find(params[:activity_id])
-    # @booking = @activity.bookings.build(user: current_user, status: :Pending)
     @booking = Booking.new(activity: @activity, user: current_user, status: :Pending)
     authorize @booking
     if @booking.save
@@ -21,7 +19,12 @@ class BookingsController < ApplicationController
     end
   end
 
+  def edit
+    @booking = Booking.find(params[:id])
+  end
+
   def destroy
+    @booking = Booking.find(params[:id])
     authorize @booking
     if @booking.destroy
       flash[:notice] = "Booking cancelled successfully."
@@ -34,10 +37,10 @@ class BookingsController < ApplicationController
   private
 
   def set_activity
-    @activity = Activity.find(params[:id])
+    @activity = Activity.find(params[:activity_id])
   end
 
   def set_booking
-    @booking = Booking.find(params[:id])
+
   end
 end
