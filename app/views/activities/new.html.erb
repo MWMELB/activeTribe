@@ -1,6 +1,5 @@
 <div class="container mt-4 p-4">
   <div class="row justify-content-center">
-    <%# <div class="col-6"> %>
       <h1>Start your own adventure!</h1>
       <% if @activity.errors.any? %>
         <div class="alert alert-danger">
@@ -16,13 +15,13 @@
         <div class="activity-box p-3 my-3">
           <h3>Event overview</h3>
           <%= f.input :title,
-                      label: "Activity Title",
+                      label: "Title",
                       placeholder: "Enter title" %>
           <%= f.input :category,
-                      label: "Activity Type",
+                      label: "Sport",
                       placeholder: "Enter type" %>
           <%= f.input :description,
-                      placeholder: "Enter description" %>
+                      placeholder: "Description" %>
           <%= f.input :price %>
           <%= f.input :capacity, step: "10" %>
         </div>
@@ -35,67 +34,11 @@
           <%= f.input :location,
                       placeholder: "Enter location" %>
         </div>
-        <%# need to fix this! to attach a photo %>
+
         <div class="activity-box p-3 my-3">
           <%= f.input :photo %>
         </div>
-        <%= f.button :submit, class: "btn btn-dark w-100" %>
+        <%= f.button :submit, class: "btn btn-dark w-100 mb-5" %>
       <% end %>
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6">
-      <div class="activity-form p-4 shadow-sm rounded">
-        <h2 class="text-center mb-5">Create a New Activity</h2>
-
-
-        <%= form_with model: @activity, local: true do |form| %>
-          <!-- Activity Title -->
-          <div class="mb-4">
-            <%= form.label :title, "Activity Title", class: "form-label" %>
-            <%= form.text_field :title, class: "form-control form-input", placeholder: "Enter activity title" %>
-          </div>
-
-          <!-- Sport (New Field) -->
-          <div class="mb-4">
-            <%= form.label :category, "Sport", class: "form-label" %>
-            <%= form.text_field :sport, class: "form-control form-input", placeholder: "Enter sport" %>
-          </div>
-
-          <!-- Description -->
-          <div class="mb-4">
-            <%= form.label :description, "Description", class: "form-label" %>
-            <%= form.text_area :description, rows: 4, class: "form-control form-input", placeholder: "Enter activity description" %>
-          </div>
-
-          <!-- Location -->
-          <div class="mb-4">
-            <%= form.label :location, "Location", class: "form-label" %>
-            <%= form.text_field :location, class: "form-control form-input", placeholder: "Enter location" %>
-          </div>
-
-          <!-- Date -->
-          <div class="mb-4">
-            <%= form.label :start, "Date", class: "form-label" %>
-            <%= form.date_field :start, class: "form-control form-input" %>
-          </div>
-
-          <!-- Duration -->
-          <div class="mb-4">
-            <%= form.label :duration, "Duration (minutes)", class: "form-label" %>
-            <%= form.number_field :duration, class: "form-control form-input", placeholder: "Enter duration" %>
-          </div>
-
-          <!-- Price -->
-          <div class="mb-4">
-            <%= form.label :price, "Price", class: "form-label" %>
-            <%= form.number_field :price, class: "form-control form-input", placeholder: "Enter price" %>
-          </div>
-
-          <div class="d-grid">
-            <%= form.submit "Create Activity", class: "btn btn-dark btn-lg w-100" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-<%# </div> %>
+</div>
+</div>

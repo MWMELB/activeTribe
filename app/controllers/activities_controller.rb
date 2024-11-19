@@ -18,13 +18,13 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = current_user.activities.build(activity_params)
+    @activity = Activity.new(activity_params)
     @activity.user = current_user
     if @activity.save
       flash[:notice] = "Activity created successfully!"
       redirect_to @activity
     else
-      flash.now[:alert] = "There was an error creating the activity."
+      flash.now[:alert] = "There was an error creating the activity. Please check the form for errors."
       render :new, status: :unprocessable_entity
     end
   end
@@ -73,6 +73,6 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :photo, :description, :location, :price, :start, :duration, :sport)
+    params.require(:activity).permit(:title, :photo, :description, :location, :price, :start, :duration, :sport, :category, :capacity)
   end
 end
