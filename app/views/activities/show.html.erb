@@ -1,22 +1,23 @@
 <div class="container mt-5 my-5 px-4 mb-5">
-  <!-- Activity Title -->
   <h1 class="text-center mb-3"><%= @activity.title %></h1>
+  <div class="row justify-content-center">
+    <% if @activity.photo.attached? %>
+      <%= image_tag @activity.photo, class: "w-50" %>
+    <% else %>
+      <p>No photo available</p>
+    <% end %>
+  </div>
 
   <div class="row justify-content-center">
-    <!-- Left Column: Activity Details -->
     <div class="col-12 col-md-8">
       <div class="card shadow-sm">
         <div class="card-body">
-          <!-- Organizer Info -->
           <p class="card-text"><strong>Organized by:</strong> <%= @activity.user.first_name %></p>
-
-          <!-- Description -->
           <h5 class="card-text">Description</h5>
           <p class="card-text"><%= @activity.description %></p>
 
           <hr>
 
-          <!-- Activity Details -->
           <ul class="list-unstyled">
             <li><strong>Date & Time:</strong> <%= @activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
             <li><strong>Duration:</strong> <%= format_duration(@activity.duration) %></li>
@@ -24,13 +25,8 @@
           </ul>
         </div>
       </div>
-
-      <!-- Action Buttons -->
       <div class="mt-4 d-flex justify-content-between">
-        <!-- Back to Activities Button -->
         <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary me-2" %>
-
-        <!-- Edit Activity Button (Only visible to the creator) -->
         <div>
           <%# should really be - if policy(@booking).create? %>
           <% if policy(@activity).edit? %>
