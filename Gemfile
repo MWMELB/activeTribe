@@ -53,6 +53,8 @@ gem "sassc-rails"
 
 gem "faker"
 gem "geocoder"
+gem "pundit"
+
 
 
 group :development, :test do
