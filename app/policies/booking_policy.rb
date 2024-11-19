@@ -17,6 +17,14 @@ class BookingPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def empty?
+    true
+  end
+
+  def accept?
+    owner?
+  end
+
 
   class Scope < ApplicationPolicy::Scope
     def resolve

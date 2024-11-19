@@ -30,9 +30,9 @@ activity_capacity = [10, 20, 30, 50, 100]
   Activity.create(
     user: activity_owner,
     # Can change the title/description
-    title: "#{activity_type} with #{activity_owner.first_name}",
+    title: "#{activity_category} with #{activity_owner.first_name}",
     category: activity_category,
-    description: "Join us in #{activity_location} for #{activity_type}",
+    description: "Join us in #{activity_location} for #{activity_category}",
     location: activity_location,
     # Start time this upcoming week
     # Faker timezone is UTC, so evening is equivalent to morning in Melbourne

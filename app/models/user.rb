@@ -11,6 +11,6 @@ class User < ApplicationRecord
   has_many :group_comments, dependent: :destroy
   has_many :activity_comments, dependent: :destroy
   has_many :groups, through: :group_users
-  has_many :activities, through: :bookings
+  has_many :booked_activities, through: :bookings, source: :activity
   validates :first_name, :last_name, :birth_date, presence: true
 end

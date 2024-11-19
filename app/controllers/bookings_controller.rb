@@ -36,8 +36,23 @@ class BookingsController < ApplicationController
 
   def booking_requests
     @booking_requests = Booking.joins(:activity).where(activities: { user: current_user })
-    @booking_requests.each do |booking_request|
-      authorize booking_request, :owner?
+    if @booking_requests.empty?
+      authorize @booking_requests, :empty?
+    else
+      @booking_requests.each do |booking_request|
+        authorize booking_request, :owner?
+      end
+    end
+
+  end
+
+  def accept
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    if @booking.update(status: 1)
+      redirect_to booking_requests_bookings_path, notice: "Booking accepted successfully."
+    else
+      redirect_to booking_requests_bookings_path, alert: "Failed to accept the booking."
     end
   end
 
@@ -49,5 +64,9 @@ class BookingsController < ApplicationController
 
   def set_booking
 
+  end
+
+  def booking_params
+    params.require(:booking).permit(:status)
   end
 end
