@@ -1,39 +1,41 @@
-/* Make sure the footer stays at the bottom of the page */
+.footer i {
+  font-size: 1.5rem;
+  color: #333;
+
+}
+
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #f8f9fa; /* Light background color */
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow to make it stand out */
-  padding: 0;
-  z-index: 100;
-}
-
-.footer .navbar-nav .nav-item {
-  margin-left: 15px;
-}
-
-.footer {
-  background-color: #f8f9fa;
-  border-top: 0px solid #ddd;
-}
-
-.footer i {
-  margin: 15px;
-}
-
-.footer p {
-  margin: 0;
-  font-size: 30px;
-}
-
-.footer a {
-  color: #5be738;
-  text-decoration: none;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  padding: 0.5rem 0;
+  z-index: 1000;
 }
 
 .footer .container {
-  max-width: 1200px;  /* Adjust this value as needed */
-  margin: 0 auto;     /* Center the container */
+  padding: 0;
+}
+
+.footer p {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.footer p > a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  text-align: center;
+}
+
+.footer a {
+  text-decoration: none;
+  color: inherit;
 }
