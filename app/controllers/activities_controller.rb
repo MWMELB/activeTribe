@@ -3,7 +3,7 @@ class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
 
   def index
-    @activities = Activity.all
+    @activities = policy_scope(Activity)
   end
 
   def show
@@ -20,7 +20,8 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = current_user.activities.build(activity_params)
+    # @activity = current_user.activities.build(activity_params)
+    @activity = Activity.new(activity_params)
     @activity.user = current_user
     authorize @activity
     if @activity.save
@@ -68,7 +69,7 @@ class ActivitiesController < ApplicationController
   private
 
   def activity_params
-    params.require(:activity).permit(:title, :description, :category, :start, :duration, :price, :location, :sport)
+    params.require(:activity).permit(:title, :description, :category, :start, :duration, :price, :location)
   end
 
   def set_activity
