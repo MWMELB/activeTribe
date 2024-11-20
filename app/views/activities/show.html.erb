@@ -1,46 +1,46 @@
-<div class="container my-5 px-4 pb-4">
-  <div class="row justify-content-center">
-    <div class="col">
-      <h1 class="text-center mb-3"><%= @activity.title %></h1>
-      <div>
-        <% if @activity.photo.attached? %>
-          <%= image_tag @activity.photo, class: "w-50" %>
-        <% else %>
-          <p>No photo available</p>
-        <% end %>
-      </div>
+<div class="my-5">
+  <div>
+    <% if @activity.photo.attached? %>
+      <%= image_tag @activity.photo, class: "w-100 activity-card-image-banner" %>
+    <% else %>
+      <p>No photo available</p>
+    <% end %>
+  </div>
+  <div class="container mt-4 px-4 pb-4">
+    <div class="row justify-content-center">
+      <div class="col">
+        <h1 class="text-center mb-3"><%= @activity.title %></h1>
 
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <p class="card-text"><strong>Organized by:</strong> <%= @activity.user.first_name %></p>
-          <h5 class="card-text">Description</h5>
-          <p class="card-text"><%= @activity.description %></p>
-          <hr>
-          <ul class="list-unstyled">
-            <li><strong>Date & Time:</strong> <%= @activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
-            <li><strong>Duration:</strong> <%= format_duration(@activity.duration) %></li>
-            <li><strong>Price:</strong> <%= format_price(@activity.price) %></li>
-          </ul>
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="card-text"><strong>Organized by:</strong> <%= @activity.user.first_name %></p>
+            <h5 class="card-text">Description</h5>
+            <p class="card-text"><%= @activity.description %></p>
+            <hr>
+            <ul class="list-unstyled">
+              <li><strong>Date & Time:</strong> <%= @activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
+              <li><strong>Duration:</strong> <%= format_duration(@activity.duration) %></li>
+              <li><strong>Price:</strong> <%= format_price(@activity.price) %></li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="d-flex justify-content-between mt-4 show-buttons">
-        <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary me-2" %>
-        <div>
-          <% if policy(@activity).edit? %>
-            <div class="d-flex pt-2">
-              <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_activity_path(@activity), class: "px-3" %>
-              <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, @activity, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this activity?" } %>
-            </div>
-          <% elsif Booking.find_by(activity: @activity, user: current_user) %>
-            <%= link_to "See my booking", bookings_path %>
-          <% else %>
-            <%= button_to "Book Now", activity_bookings_path(@activity), method: :post, class: "btn btn-success" %>
-          <% end %>
+        <div class="d-flex justify-content-between mt-4 show-buttons">
+          <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary me-2" %>
+          <div>
+            <% if policy(@activity).edit? %>
+              <div class="d-flex pt-2">
+                <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_activity_path(@activity), class: "px-3" %>
+                <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, @activity, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this activity?" } %>
+              </div>
+            <% elsif Booking.find_by(activity: @activity, user: current_user) %>
+              <%= link_to "See my booking", bookings_path %>
+            <% else %>
+              <%= button_to "Book Now", activity_bookings_path(@activity), method: :post, class: "btn btn-success" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
-  <%# </div> %>
