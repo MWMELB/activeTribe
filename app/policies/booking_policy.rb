@@ -5,6 +5,10 @@ class BookingPolicy < ApplicationPolicy
   # code, beware of possible changes to the ancestors:
   # https://gist.github.com/Burgestrand/4b4bc22f31c8a95c425fc0e30d7ef1f5
 
+  def owner?
+    record.activity.user == user
+  end
+
   def create?
     record.activity.user != user
   end
@@ -13,8 +17,23 @@ class BookingPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def empty?
+    true
+  end
+
+  def accept?
+    owner?
+  end
+
+  def decline?
+    owner?
+  end
+
+  def booking_requests?
+    user.present?
+  end
+
   class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
     def resolve
       scope.where(user: user)
     end
