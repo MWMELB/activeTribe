@@ -6,6 +6,11 @@ class ActivitiesController < ApplicationController
     @activities = policy_scope(Activity)
   end
 
+  def my_activities
+    @activities = Activity.where( user: current_user )
+    authorize Activity
+  end
+
   def show
     @marker = {
       lat: @activity.latitude,
