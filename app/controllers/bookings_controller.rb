@@ -35,15 +35,11 @@ class BookingsController < ApplicationController
   end
 
   def booking_requests
-    @booking_requests = Booking.joins(:activity).where(activities: { user: current_user })
-    if @booking_requests.empty?
-      authorize @booking_requests, :empty?
-    else
-      @booking_requests.each do |booking_request|
-        authorize booking_request, :owner?
-      end
-    end
+    @pending_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Pending)
+    @accepted_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Accepted)
+    @declined_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Declined)
 
+    authorize Booking, :booking_requests?
   end
 
   def accept

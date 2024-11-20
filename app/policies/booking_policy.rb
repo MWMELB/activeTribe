@@ -29,6 +29,10 @@ class BookingPolicy < ApplicationPolicy
     owner?
   end
 
+  def booking_requests?
+    user.present?
+  end
+
   class Scope < ApplicationPolicy::Scope
     def resolve
       scope.where(user: user)
