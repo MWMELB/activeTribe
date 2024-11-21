@@ -65,7 +65,7 @@ class BookingsController < ApplicationController
   private
 
   def set_activity
-    @activity = Activity.find(params[:activity_id])
+    @activity = Activity.find(params[:id])
   end
 
   def set_booking

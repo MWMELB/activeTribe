@@ -1,5 +1,9 @@
 class GroupUsersController < ApplicationController
 
+  def index
+    @group_users = policy_scope(GroupUser)
+  end
+
   def create
     @group = Group.find(params[:id])
     @group_user = GroupUser.new(group: @group, user: current_user)

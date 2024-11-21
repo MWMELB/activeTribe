@@ -36,7 +36,7 @@
             <% elsif Booking.find_by(activity: @activity, user: current_user) %>
               <%= link_to "See my booking", bookings_path %>
             <% else %>
-              <%= button_to "Book Now", activity_bookings_path(@activity), method: :post, class: "btn btn-success" %>
+              <%= button_to "Book Now", book_activity_path(@activity), method: :post, class: "btn btn-success" %>
             <% end %>
           </div>
         </div>

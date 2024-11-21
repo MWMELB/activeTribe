@@ -9,7 +9,9 @@
             <ul>
               <li><%= group.description %></li>
 
-              <%= button_to "Join us", join_group_path(group), method: :post, class: "btn btn-success" %>
+              <% if policy(group).not_owner? %>
+                <%= button_to "Join us", join_group_path(group), method: :post, class: "btn btn-success" %>
+              <% end %>
             </ul>
           </div>
         </div>

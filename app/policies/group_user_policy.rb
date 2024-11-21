@@ -10,8 +10,10 @@ class GroupUserPolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def resolve
+      scope.select do |group_user|
+        group_user.group.user == user || group_user.user == user
+      end
+    end
   end
 end
