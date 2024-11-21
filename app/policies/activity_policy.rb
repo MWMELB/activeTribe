@@ -28,6 +28,10 @@ class ActivityPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def my_activities?
+    user.present?
+  end
+
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve

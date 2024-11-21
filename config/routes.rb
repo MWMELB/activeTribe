@@ -3,8 +3,25 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :activities do
     resources :bookings, only: [:create]
+    resources :bookings, only: [:index] do
+      collection do
+        get :request  # Show pending bookings for a specific activity
+      end
+    end
   end
-  resources :bookings, only: [:index, :destroy]
+
+  get "my_activities", to: "activities#my_activities"
+
+  resources :bookings do
+    collection do
+      get :booking_requests
+
+    end
+    member do
+      patch :accept
+      patch :decline
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

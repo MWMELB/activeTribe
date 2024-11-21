@@ -6,8 +6,12 @@ class ActivitiesController < ApplicationController
     @activities = policy_scope(Activity)
   end
 
+  def my_activities
+    @activities = Activity.where( user: current_user )
+    authorize Activity
+  end
+
   def show
-    authorize @activity
     @marker = {
       lat: @activity.latitude,
       lng: @activity.longitude
@@ -25,7 +29,7 @@ class ActivitiesController < ApplicationController
     authorize @activity
     if @activity.save
       flash[:notice] = "Activity created successfully!"
-      redirect_to @activity
+      redirect_to activity_path(@activity)
     else
       flash.now[:alert] = "There was an error creating the activity. Please check the form for errors."
       render :new, status: :unprocessable_entity
@@ -34,34 +38,25 @@ class ActivitiesController < ApplicationController
 
   def edit
     @activity = Activity.find(params[:id])
-    authorize @activity
-    # redirect_to activities_path, alert: "You can't edit this activity" unless @activity.user == current_user
   end
 
   def update
     @activity = Activity.find(params[:id])
-    authorize @activity
-    # if @activity.user == current_user
-      if @activity.update(activity_params)
-        flash[:notice] = "Activity updated successfully!"
-        redirect_to @activity
-      else
-        flash.now[:alert] = "There was an error updating the activity."
-        render :edit, status: :unprocessable_entity
-      end
-    # else
-      # redirect_to activities_path, alert: "You can't edit this activity"
-    # end
+    if @activity.update(activity_params)
+      flash[:notice] = "Activity updated successfully!"
+      redirect_to @activity
+    else
+      flash.now[:alert] = "There was an error updating the activity."
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    authorize @activity
-    # if @activity.user == current_user
-      @activity.destroy
+    if @activity.destroy
       flash[:notice] = "Activity was successfully deleted."
-    # else
-      # redirect_to root_path, status: :unprocessable_entity
-    # end
+    else
+      flash[:alert] = "Failed to delete the activity."
+    end
     redirect_to activities_path
   end
 
@@ -73,6 +68,7 @@ class ActivitiesController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:id])
+    authorize @activity
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = "Activity not found."
     redirect_to activities_path

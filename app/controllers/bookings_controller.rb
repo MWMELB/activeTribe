@@ -34,6 +34,34 @@ class BookingsController < ApplicationController
     redirect_to bookings_path
   end
 
+  def booking_requests
+    @pending_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Pending)
+    @accepted_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Accepted)
+    @declined_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Declined)
+
+    authorize Booking, :booking_requests?
+  end
+
+  def accept
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    if @booking.update(status: 1)
+      redirect_to booking_requests_bookings_path, notice: "Booking accepted successfully."
+    else
+      redirect_to booking_requests_bookings_path, alert: "Failed to accept the booking."
+    end
+  end
+
+  def decline
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    if @booking.update(status: 2)
+      redirect_to booking_requests_bookings_path, notice: "Booking declined successfully."
+    else
+      redirect_to booking_requests_bookings_path, alert: "Failed to decline the booking."
+    end
+  end
+
   private
 
   def set_activity
@@ -42,5 +70,9 @@ class BookingsController < ApplicationController
 
   def set_booking
 
+  end
+
+  def booking_params
+    params.require(:booking).permit(:status)
   end
 end
