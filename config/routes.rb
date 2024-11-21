@@ -10,9 +10,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :groups do
-    resources :group_users, only: [:create]
-  end
+  resources :groups
+
+  post "groups/:id/join", to: "group_users#create", as: :join_group
 
   get "my_activities", to: "activities#my_activities"
 
