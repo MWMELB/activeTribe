@@ -315,7 +315,7 @@ DEPENDENCIES
   jbuilder
   pg (~> 1.1)
   puma (>= 5.0)
-  pundit
+  pundit (~> 2.4)
   rails (~> 7.1.4, >= 7.1.4.2)
   sassc-rails
   selenium-webdriver

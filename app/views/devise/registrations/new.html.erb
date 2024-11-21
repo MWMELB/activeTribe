@@ -2,12 +2,53 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
       <div class="signup-form p-4 shadow-sm rounded">
-        <h2 class="text-center mb-5">Enter your email to join us.</h2>
+        <h2 class="text-center mb-5">Enter your details to join us.</h2>
+
+        <!-- Display Errors Above Form Fields -->
+        <% if resource.errors.any? %>
+          <div class="alert alert-danger" role="alert" style="padding: 0.5rem 1rem; margin-bottom: 1.5rem;">
+            <small>
+            <ul class="mb-0" style="margin-bottom: 1rem;">
+              <% resource.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              <% if resource.errors[:terms].any? %>
+                <li><%= resource.errors[:terms].first %></li>
+              <% end %>
+            </ul>
+            </small>
+          </div>
+        <% end %>
 
         <%= form_with model: resource, url: registration_path(resource_name), local: true do |f| %>
+          <!-- First Name Input -->
+          <div class="mb-4">
+            <%= f.text_field :first_name, class: "form-control form-input", placeholder: "First Name" %>
+          </div>
+
+          <!-- Last Name Input -->
+          <div class="mb-4">
+            <%= f.text_field :last_name, class: "form-control form-input", placeholder: "Last Name" %>
+          </div>
+
+          <!-- Birth Date Input -->
+          <div class="mb-4">
+            <%= f.date_field :birth_date, class: "form-control form-input", placeholder: "Birth Date" %>
+          </div>
+
           <!-- Email Input -->
           <div class="mb-4">
             <%= f.email_field :email, autofocus: true, class: "form-control form-input", placeholder: "email@example.com" %>
+          </div>
+
+          <!-- Password Input -->
+          <div class="mb-4">
+            <%= f.password_field :password, class: "form-control form-input", placeholder: "Password", autocomplete: "new-password" %>
+          </div>
+
+          <!-- Password Confirmation Input -->
+          <div class="mb-4">
+            <%= f.password_field :password_confirmation, class: "form-control form-input", placeholder: "Confirm Password", autocomplete: "new-password" %>
           </div>
 
           <!-- Agreement Checkbox -->
