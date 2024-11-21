@@ -1,0 +1,31 @@
+<%= simple_form_for (@activity) do |f| %>
+  <div class="activity-form-box p-3 mt-5 mb-3 mx-3">
+    <h3>Event overview</h3>
+    <%= f.input :title,
+                label: "Title",
+                placeholder: "Enter title" %>
+    <%= f.input :category,
+                label: "Activity type",
+                placeholder: "Enter type" %>
+    <%= f.input :description,
+                placeholder: "Description" %>
+    <%= f.input :price %>
+    <%= f.input :capacity, step: "10" %>
+  </div>
+
+  <div class="activity-form-box p-3 mx-3">
+    <%= f.input :start,
+                label: "Date and time" %>
+    <%= f.input :duration,
+                label: "Duration (minutes)",
+                placeholder: "Enter duration" %>
+    <%= f.input :location,
+                placeholder: "Enter location" %>
+  </div>
+
+  <div class="activity-form-box mx-3 p-3 my-3">
+    <%= f.input :photo, as: :file, label: "Upload a Photo" %>
+  </div>
+
+  <%= f.button :submit, class: "btn btn-dark w-100 mb-5" %>
+<% end %>

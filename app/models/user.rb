@@ -24,4 +24,6 @@ class User < ApplicationRecord
   def terms_accepted
     errors.add(:terms, "must be accepted") unless terms == "1"
   end
+  has_many :booked_activities, through: :bookings, source: :activity
+  validates :first_name, :last_name, :birth_date, presence: true
 end
