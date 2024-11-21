@@ -1,0 +1,18 @@
+<div class="container my-5 px-4 pb-4">
+  <div class="row">
+    <div class="col">
+      <h1>All groups</h1>
+      <% @groups.each do |group| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h2 class="card-title"><%= link_to group.name, group_path(group) %></h2>
+            <ul>
+              <li><%= group.description %></li>
+              <li><%= link_to "Join us?", groups_path %></li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

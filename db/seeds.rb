@@ -1,5 +1,8 @@
 require "faker"
 
+puts "Emptying GROUPS database..."
+Group.destroy_all
+
 puts "Emptying ACTIVITIES database..."
 Activity.destroy_all
 
@@ -50,6 +53,15 @@ activities.each_with_index do |activity, index|
   new_activity.photo.attach(io: file, filename: "#{activity}.jpg", content_type: "image/png")
   new_activity.save
   file.close
+
+  if index.odd?
+    puts "Creating group #{index}"
+    Group.create(
+      user: owner,
+      name: "#{Faker::Team.creature} #{activity} club",
+      description: "We love #{activity} 🤩"
+    )
+  end
 end
 
 puts "DONE!"
