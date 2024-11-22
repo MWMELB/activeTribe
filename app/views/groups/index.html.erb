@@ -6,13 +6,15 @@
         <div class="card mb-3">
           <div class="card-body">
             <h2 class="card-title"><%= link_to group.name, group_path(group) %></h2>
-            <ul>
-              <li><%= group.description %></li>
+              <%= group.description %>
 
-              <% if policy(group).not_owner? %>
-                <%= button_to "Join us", join_group_path(group), method: :post, class: "btn btn-success" %>
-              <% end %>
-            </ul>
+              <div class="d-flex justify-content-end">
+                <% if policy(group).owner? || GroupUser.find_by(group: group, user: current_user) %>
+                  <em>You are already a member</em>
+                <% else %>
+                  <%= button_to "Join us", join_group_path(group), method: :post, class: "btn btn-success" %>
+                <% end %>
+              </div>
           </div>
         </div>
       <% end %>

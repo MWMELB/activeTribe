@@ -18,8 +18,8 @@ for i in 1..5 do
   first = Faker::Name.first_name
   last = Faker::Name.last_name
   User.create(
-    first_name: first,
-    last_name: last,
+    first_name: first.downcase,
+    last_name: last.downcase,
     username: "#{first}_#{last}",
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     email: "user#{i}@gmail.com",
