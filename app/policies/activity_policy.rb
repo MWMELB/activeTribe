@@ -4,12 +4,17 @@ class ActivityPolicy < ApplicationPolicy
   # In most cases the behavior will be identical, but if updating existing
   # code, beware of possible changes to the ancestors:
   # https://gist.github.com/Burgestrand/4b4bc22f31c8a95c425fc0e30d7ef1f5
+
+  def owner?
+    record.user == user
+  end
+
   def show?
-    true
+    user.present?
   end
 
   def new?
-    true
+    user.present?
   end
 
   def create?
@@ -17,15 +22,15 @@ class ActivityPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.user == user
+    owner?
   end
 
   def update?
-    record.user == user
+    edit?
   end
 
   def destroy?
-    record.user == user
+    owner
   end
 
   def my_activities?

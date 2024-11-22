@@ -1,0 +1,16 @@
+<div class="container my-5 px-4 pb-4">
+  <div class="row">
+    <div class="col">
+      <h1>My Groups</h1>
+      <%= link_to "Explore more groups", groups_path %>
+      <% @group_users.each do |group_user| %>
+      <div class="card">
+        <div class="card-body">
+          <h2><%= link_to group_user.group.name, group_path(group_user.group)%></h2>
+          <p>Member since <%= group_user.created_at.strftime("%b %Y") %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

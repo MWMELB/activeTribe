@@ -1,12 +1,10 @@
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapbox-gl' // Don't forget this!
 
-
-// Connects to data-controller="map"
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    marker: Object
   }
 
   connect() {
@@ -16,5 +14,14 @@ export default class extends Controller {
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10"
     })
+    this.#addMarkerToMap()
+  }
+
+  #addMarkerToMap() {
+    // this.markerValue.forEach((marker) => {
+    this.markerValue = new mapboxgl.Marker()
+        .setLngLat( [ lng, lat ])
+        .addTo(this.map)
+    // })
   }
 }
