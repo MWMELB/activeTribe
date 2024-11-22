@@ -46,9 +46,9 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     authorize @booking
     if @booking.update(status: 1)
-      redirect_to booking_requests_bookings_path, notice: "Booking accepted successfully."
+      redirect_to activity_path(@booking.activity), notice: "Booking accepted successfully."
     else
-      redirect_to booking_requests_bookings_path, alert: "Failed to accept the booking."
+      redirect_to activity_path(@booking.activity), alert: "Failed to accept the booking."
     end
   end
 
@@ -56,9 +56,9 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     authorize @booking
     if @booking.update(status: 2)
-      redirect_to booking_requests_bookings_path, notice: "Booking declined successfully."
+      redirect_to activity_path(@booking.activity), notice: "Booking declined successfully."
     else
-      redirect_to booking_requests_bookings_path, alert: "Failed to decline the booking."
+      redirect_to activity_path(@booking.activity), alert: "Failed to decline the booking."
     end
   end
 

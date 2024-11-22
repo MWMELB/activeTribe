@@ -1,4 +1,12 @@
-<h1>My Groups</h1>
-<% @group_users.each do |group_user| %>
-  <%= group_user.group.name %>
-<% end %>
+<div class="container my-5 px-4 pb-4">
+  <div class="row">
+    <div class="col">
+      <h1>My Groups</h1>
+      <% @group_users.each do |group_user| %>
+      <div class="card">
+        <%= group_user.group.name %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

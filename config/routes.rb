@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+
+  get '/:username/activities', to: 'activities#my_activities', as: :my_activities
+  get '/:username/groups', to: 'group_users#index', as: :my_groups
+
   resources :activities do
-    # resources :bookings, only: [:create]
     resources :bookings, only: [:index] do
-      collection do
-        get :request  # Show pending bookings for a specific activity
-      end
     end
   end
-  get "my_activities", to: "activities#my_activities"
+  # get "my_activities", to: "activities#my_activities"
   post "activities/:id/book", to: "bookings#create", as: :book_activity
+
 
   resources :bookings do
     collection do
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
 
   resources :groups
   post "groups/:id/join", to: "group_users#create", as: :join_group
-  get "my_groups", to: "group_users#index"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
