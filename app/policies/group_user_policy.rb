@@ -7,7 +7,8 @@ class GroupUserPolicy < ApplicationPolicy
 
 
   def create?
-    user.present? && record.group.user != user
+    # user logged in && not owner && not member
+    user.present? && record.group.user != user &&
   end
 
   class Scope < ApplicationPolicy::Scope

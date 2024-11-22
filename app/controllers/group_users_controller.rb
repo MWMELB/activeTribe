@@ -10,7 +10,7 @@ class GroupUsersController < ApplicationController
     authorize @group_user
     if @group_user.save
       flash[:notice] = "Joined group successfully!"
-      redirect_to groups_path
+      redirect_to my_groups_path(current_user.username)
     else
       flash[:alert] = "Error"
       redirect_to group_path(@group)
