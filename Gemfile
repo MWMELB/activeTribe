@@ -53,9 +53,8 @@ gem "sassc-rails"
 
 gem "faker"
 gem "geocoder"
-gem "pundit"
+gem "pundit", "~> 2.4"
 gem "pg_search"
-
 
 
 group :development, :test do
