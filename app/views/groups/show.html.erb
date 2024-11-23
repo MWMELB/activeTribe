@@ -5,9 +5,13 @@
       <p><%= @group.description %></p>
 
       <% if policy(@group).destroy? %>
-        <%= link_to "Delete", @group, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this group?" }%>
+        <!-- Only show the delete button if the current user is the owner of the group -->
+        <%= link_to "Delete", @group, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this group?" }, class: "btn btn-danger" %>
       <% elsif !GroupUser.find_by(group: @group, user: current_user) %>
         <%= button_to "Join us", join_group_path(@group), method: :post, class: "btn btn-success" %>
+      <% else %>
+        <!-- Show the "Leave Group" button if the user is a member -->
+        <%= button_to "Leave Group", leave_group_path(@group), method: :delete, class: "btn btn-danger" %>
       <% end %>
 
       <h2>Recent Posts</h2>

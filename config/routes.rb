@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :groups
   post "groups/:id/join", to: "group_users#create", as: :join_group
+  delete "groups/:id/leave", to: "group_users#destroy", as: :leave_group
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
