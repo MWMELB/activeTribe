@@ -43,7 +43,7 @@ activities.each_with_index do |activity, index|
   new_activity = Activity.create(
     user: owner,
     # Can change the title/description
-    title: "#{activity.capitalize} with #{owner.first_name}",
+    title: "#{activity.capitalize} with #{owner.first_name.capitalize}",
     category: activity,
     description: "Join us in #{location} for #{activity}",
     location: location,
