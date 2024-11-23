@@ -5,6 +5,9 @@ class GroupsController < ApplicationController
   end
 
   def show
+    @group = Group.find(params[:id])
+    @group_comments = @group.group_comments
+    @comment = GroupComment.new
   end
 
   def new

@@ -23,7 +23,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :groups
+  resources :groups do
+    resource :group_user, only: [:destroy]
+    resources :group_comments, only: [:create, :destroy]
+  end
   post "groups/:id/join", to: "group_users#create", as: :join_group
   delete "groups/:id/leave", to: "group_users#destroy", as: :leave_group
 
