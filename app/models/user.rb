@@ -26,4 +26,8 @@ class User < ApplicationRecord
   def terms_accepted
     errors.add(:terms, "must be accepted") unless terms == true
   end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

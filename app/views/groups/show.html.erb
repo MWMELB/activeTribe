@@ -14,7 +14,47 @@
         <%= button_to "Leave Group", leave_group_path(@group), method: :delete, class: "btn btn-danger" %>
       <% end %>
 
-      <h2>Recent Posts</h2>
+      <!-- Group Photo -->
+      <% if @group.photo.attached? %>
+        <div class="mt-4">
+          <%= image_tag @group.photo, class: "img-fluid rounded" %>
+        </div>
+      <% end %>
+
+      <h2 class="mt-5">Recent Posts</h2>
+
+      <!-- Comment Form -->
+      <div class="mt-4">
+        <h3>Leave a comment:</h3>
+        <%= form_with model: @comment, url: group_group_comments_path(@group), method: :post, local: true do |form| %>
+          <div class="form-group">
+            <%= form.label :content, "Your Comment" %>
+            <%= form.text_area :content, class: "form-control", rows: 3 %>
+          </div>
+          <%= form.submit "Post Comment", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="mt-5">
+        <% if @group_comments.any? %>
+          <% @group_comments.each do |comment| %>
+            <div class="card mb-3">
+              <div class="card-body">
+                <p><strong><%= comment.user.first_name %> <%= comment.user.last_name %>:</strong> <%= comment.content %></p>
+                <p><small><%= time_ago_in_words(comment.created_at) %> ago</small></p>
+
+                <!-- Optional: Delete Comment Button for the Author -->
+                <% if comment.user == current_user %>
+                  <%= link_to "Delete", group_group_comment_path(@group, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p>No comments yet.</p>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
