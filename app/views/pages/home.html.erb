@@ -1,8 +1,13 @@
 <div class="container">
 
   <section class="mt-4" style="text-align: left; padding-left: 10px; padding-top: 30px;">
-  <h1>Discover</h1>
-</section>
+    <h1>Discover</h1>
+  </section>
+
+<div class="container">
+  <section class="map-section" style="height: 300px; margin-top: 30px;">
+    <div id="map" style="width: 100%; height: 100%;"></div>
+  </section>
 
   <section class="featured-activities py-2">
     <h2 class="mt-4 mb-5 text-center text-gray fs-3 rounded-2">
@@ -10,12 +15,10 @@
     </h2>
 
     <div class="container">
-      <div class="row justify-content-center g-4">
+      <div class="row justify-content-center g-4 mb-5">
         <% @activities.each do |activity| %>
           <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-
             <div class="card shadow-sm border-0 activity-card" style="border-radius: 15px;">
-
               <% if activity.photo.attached? %>
                 <%= image_tag activity.photo, class:"img-fluid", alt:"activity image", style:"border-radius: 15px 15px 0 0; height: 150px; object-fit: cover;" %>
               <% else %>
@@ -35,3 +38,57 @@
     </div>
   </section>
 </div>
+
+<script>
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoibnJvbWFzYW50YSIsImEiOiJjbTE5MjYzNjcxMDdjMmptenN2M2F3ZzZnIn0.2iI2J6g6qNHHZ4gKxZFaqw';
+
+  var fallbackLongitude = -37.8136;
+  var fallbackLatitude = 144.9631;
+
+  function initializeMap(longitude, latitude) {
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [longitude, latitude],
+      zoom: 13
+    });
+
+    new mapboxgl.Marker()
+      .setLngLat([longitude, latitude])
+      .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<b>Your Location</b>"))
+      .addTo(map);
+
+
+    <% @activities.each do |activity| %>
+      <% if activity.latitude.present? && activity.longitude.present? %>
+        new mapboxgl.Marker()
+          .setLngLat([<%= activity.longitude %>, <%= activity.latitude %>])
+          .setPopup(
+            new mapboxgl.Popup({ offset: 25 })
+              .setHTML("<b><%= activity.title %></b><br><%= activity.location %>")
+          )
+          .addTo(map);
+      <% end %>
+    <% end %>
+  }
+
+  function onGeolocationSuccess(position) {
+    var userLongitude = position.coords.longitude;
+    var userLatitude = position.coords.latitude;
+
+    initializeMap(userLongitude, userLatitude);
+  }
+
+  function onGeolocationError() {
+    console.log("Geolocation access denied or failed. Using fallback location.");
+    initializeMap(fallbackLongitude, fallbackLatitude);
+  }
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(onGeolocationSuccess, onGeolocationError);
+  } else {
+    console.log("Geolocation is not supported by this browser. Using fallback location.");
+    initializeMap(fallbackLongitude, fallbackLatitude);
+  }
+</script>
