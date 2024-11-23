@@ -4,6 +4,10 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities = policy_scope(Activity)
+    Rails.logger.debug "Search term: #{params[:search]}"
+    if params[:search].present?
+      @activities = @activities.where('title ILIKE ?', "%#{params[:search]}%")
+    end
   end
 
   def my_activities

@@ -1,12 +1,19 @@
 <div class="container my-5 px-4 pb-4">
   <div class="row justify-content-center">
     <div class="col">
+      <form method="get" action="<%= activities_path %>" class="mb-4">
+        <div class="input-group">
+          <input type="text" class="form-control" name="search" placeholder="Search activities..." aria-label="Search activities" value="<%= params[:search] %>">
+          <button class="btn btn-dark" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </form>
       <h1 class="text-center mb-3">All Available Activities</h1>
-      <div class=>
+
+      <div>
         <% @activities.each do |activity| %>
-            <!-- Activity Card -->
             <div class="card shadow-sm activity-card mb-3">
-              <!-- Activity Title -->
               <div class="card-body">
                 <h2 class="card-title"><%= link_to activity.title, activity_path(activity)%></h2>
                 <ul class="list-unstyled">
@@ -15,8 +22,6 @@
                   <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
                   <li><strong>Price:</strong> <%= format_price(activity.price) %></li>
                 </ul>
-
-                <!-- View Details Button -->
                 <%= link_to "View Details", activity_path(activity), class: "btn btn-dark w-100" %>
               </div>
             </div>
