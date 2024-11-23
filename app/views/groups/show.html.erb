@@ -46,7 +46,7 @@
 
                 <!-- Optional: Delete Comment Button for the Author -->
                 <% if comment.user == current_user %>
-                  <%= link_to "Delete", group_group_comment_path(@group, comment), method: :delete, class: "btn btn-danger btn-sm" %>
+                  <%= button_to "Delete", group_group_comment_path(@group, comment), method: :delete, data: { turbo: false }, class: "btn btn-danger btn-sm" %>
                 <% end %>
               </div>
             </div>
