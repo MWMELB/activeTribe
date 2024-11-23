@@ -23,7 +23,8 @@ for i in 1..5 do
     username: "#{first}_#{last}",
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     email: "user#{i}@gmail.com",
-    password: "password"
+    password: "password",
+    terms: true
   )
 end
 
