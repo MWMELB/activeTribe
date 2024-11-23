@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @group_comments = @group.group_comments
+    @group_comments = @group.group_comments.includes(:user)
     @comment = GroupComment.new
   end
 

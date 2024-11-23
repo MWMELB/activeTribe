@@ -1,13 +1,11 @@
 class GroupCommentsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_group
 
   def create
-    @group = Group.find(params[:group_id]) # Find the group to which the comment belongs
-    authorize @group, :comment?
-
     @comment = @group.group_comments.build(comment_params)
     @comment.user = current_user # Associate the comment with the current user
-
+    authorize @group, :comment?
     if @comment.save
       flash[:notice] = "Comment posted successfully."
       redirect_to group_path(@group)
@@ -18,10 +16,9 @@ class GroupCommentsController < ApplicationController
   end
 
   def destroy
-    @group = Group.find(params[:group_id])
     @comment = @group.group_comments.find(params[:id])
+    Rails.logger.debug "Comment ID: #{params[:id]}, Group ID: #{@group.id}"
     authorize @comment, :destroy? # Assuming you have pundit authorization for comment actions
-
     if @comment.destroy
       flash[:notice] = "Comment deleted."
     else
@@ -31,7 +28,16 @@ class GroupCommentsController < ApplicationController
     redirect_to group_path(@group)
   end
 
+  def show
+    @group_comment = @group.group_comments.find(params[:id])
+    authorize @group_comment, :show?
+  end
+
   private
+
+  def set_group
+    @group = Group.find(params[:group_id])
+  end
 
   def comment_params
     params.require(:group_comment).permit(:content) # Only allow content for comments
