@@ -1,5 +1,11 @@
 require "faker"
 
+puts "Emptying GROUP_USERS database..."
+GroupUser.destroy_all
+
+puts "Emptying GROUPS database..."
+Group.destroy_all
+
 puts "Emptying ACTIVITIES database..."
 Activity.destroy_all
 
@@ -9,9 +15,12 @@ User.destroy_all
 puts "Creating 5 users..."
 for i in 1..5 do
   puts "Creating user #{i}"
+  first = Faker::Name.first_name
+  last = Faker::Name.last_name
   User.create(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    first_name: first.downcase,
+    last_name: last.downcase,
+    username: "#{first}_#{last}",
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     email: "user#{i}@gmail.com",
     password: "password"
@@ -45,6 +54,18 @@ activity_capacity = [10, 20, 30, 50, 100]
     # Capacity range from 10 to unlimited
     capacity: activity_capacity.sample
   )
+  new_activity.photo.attach(io: file, filename: "#{activity}.jpg", content_type: "image/png")
+  new_activity.save
+  file.close
+
+  if index.odd?
+    puts "Creating group #{index}"
+    Group.create(
+      user: owner,
+      name: "#{Faker::Team.creature} #{activity} club",
+      description: "We love #{activity} 🤩"
+    )
+  end
 end
 
 puts "DONE!"

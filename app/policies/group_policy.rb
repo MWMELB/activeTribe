@@ -1,4 +1,4 @@
-class ActivityPolicy < ApplicationPolicy
+class GroupPolicy < ApplicationPolicy
   # NOTE: Up to Pundit v2.3.1, the inheritance was declared as
   # `Scope < Scope` rather than `Scope < ApplicationPolicy::Scope`.
   # In most cases the behavior will be identical, but if updating existing
@@ -21,20 +21,8 @@ class ActivityPolicy < ApplicationPolicy
     new?
   end
 
-  def edit?
-    owner?
-  end
-
-  def update?
-    edit?
-  end
-
   def destroy?
-    owner
-  end
-
-  def my_activities?
-    user.present?
+    record.user == user
   end
 
   class Scope < ApplicationPolicy::Scope

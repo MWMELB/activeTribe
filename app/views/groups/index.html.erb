@@ -1,0 +1,36 @@
+<div class="container my-5 px-4 pb-4">
+  <div class="row justify-content-center">
+    <div class="col">
+      <%= form_with url: groups_path, method: :get, class: "d-flex" do %>
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Type a keyword"
+          %>
+        <%= submit_tag "Search", name: "", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h1>All groups</h1>
+      <% @groups.each do |group| %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h2 class="card-title"><%= link_to group.name, group_path(group) %></h2>
+              <%= group.description %>
+
+              <div class="d-flex justify-content-end">
+                <% if policy(group).owner? || GroupUser.find_by(group: group, user: current_user) %>
+                  <em>You are already a member</em>
+                <% else %>
+                  <%= button_to "Join us", join_group_path(group), method: :post, class: "btn btn-success" %>
+                <% end %>
+              </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

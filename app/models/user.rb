@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :activities, through: :bookings
 
   has_many :booked_activities, through: :bookings, source: :activity
-  validates :first_name, :last_name, :birth_date, :email, presence: true
+  validates :first_name, :last_name, :birth_date, :email, :username, presence: true
 
   # Attribute for terms agreement (sign-up page)
   attr_accessor :terms

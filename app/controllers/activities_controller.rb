@@ -16,6 +16,11 @@ class ActivitiesController < ApplicationController
       lat: @activity.latitude,
       lng: @activity.longitude
     }
+    @pending_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Pending)
+    @accepted_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Accepted)
+    @declined_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Declined)
+
+    authorize Booking, :booking_requests?
   end
 
   def new

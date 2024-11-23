@@ -2,7 +2,7 @@
 
   <section class="mt-4" style="text-align: left; padding-left: 10px; padding-top: 30px;">
   <h1>Discover</h1>
- </section>
+</section>
 
   <section class="featured-activities py-2">
     <h2 class="mt-4 mb-5 text-center text-gray fs-3 rounded-2">
@@ -16,7 +16,11 @@
 
             <div class="card shadow-sm border-0 activity-card" style="border-radius: 15px;">
 
-              <%= image_tag activity.photo, class:"img-fluid", alt:"activity image", style:"border-radius: 15px 15px 0 0; height: 150px; object-fit: cover;" %>
+              <% if activity.photo.attached? %>
+                <%= image_tag activity.photo, class:"img-fluid", alt:"activity image", style:"border-radius: 15px 15px 0 0; height: 150px; object-fit: cover;" %>
+              <% else %>
+                <p>No photo available</p>
+              <% end %>
 
               <div class="card-body d-flex flex-column">
                 <h5 class="card-title text-dark"><%= activity.title %></h5>
