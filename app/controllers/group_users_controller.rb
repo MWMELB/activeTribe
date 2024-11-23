@@ -21,12 +21,14 @@ class GroupUsersController < ApplicationController
     @group = Group.find(params[:id])
     @group_user = GroupUser.find_by(group: @group, user: current_user)
     authorize @group_user
-  if @group_user
-    @group_user.destroy
-    flash[:notice] = "You have left the group."
-  else
-    flash[:alert] = "You are not a member of this group."
-  end
-  redirect_to group_path(@group)
+
+    if @group_user
+      @group_user.destroy
+      flash[:notice] = "You have left the group."
+    else
+      flash[:alert] = "You are not a member of this group."
+    end
+
+    redirect_to my_groups_path(current_user.username)
   end
 end

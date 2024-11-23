@@ -11,6 +11,10 @@ class GroupUserPolicy < ApplicationPolicy
     user.present? && record.group.user != user
   end
 
+  def destroy?
+    record.group.user == user || record.user == user
+  end
+
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
