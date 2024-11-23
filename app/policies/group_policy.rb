@@ -25,6 +25,9 @@ class GroupPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def comment?
+    user.present? && record.members.include?(user)
+  end
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
