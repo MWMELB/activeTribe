@@ -2,31 +2,117 @@
   <div class="row justify-content-center">
     <div class="col">
       <form method="get" action="<%= activities_path %>" class="mb-4">
-        <div class="input-group">
-          <input type="text" class="form-control" name="search" placeholder="Search activities..." aria-label="Search activities" value="<%= params[:search] %>">
-          <button class="btn btn-dark" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
+        <div class="row">
+          <!-- Search keyword -->
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="search" placeholder="Search by keywords..." aria-label="Search activities" value="<%= params[:search] %>">
+          </div>
+          <!-- Date filter dropdown -->
+          <div class="col-md-3">
+            <select class="form-select" id="date-filter" name="date">
+              <option value="">Select Date</option>
+              <option value="<%= Date.today %>" <%= 'selected' if params[:date] == Date.today.to_s %>>Today</option>
+              <option value="<%= Date.tomorrow %>" <%= 'selected' if params[:date] == Date.tomorrow.to_s %>>Tomorrow</option>
+              <option value="select-date">Select Different Date</option>
+            </select>
+          </div>
+          <!-- Calendar date picker (hidden by default) -->
+          <div class="col-md-3" id="custom-date-picker" style="display: none;">
+            <input type="date" class="form-control" id="custom-date" name="custom_date" value="<%= params[:custom_date] %>">
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <!-- Filter by category -->
+          <div class="col-md-2">
+            <select class="form-select" name="category">
+              <option value="">Select Category</option>
+              <option value="basketball" <%= 'selected' if params[:category] == 'basketball' %>>Basketball</option>
+              <option value="tennis" <%= 'selected' if params[:category] == 'tennis' %>>Tennis</option>
+              <option value="hike" <%= 'selected' if params[:category] == 'hike' %>>Hike</option>
+              <option value="running" <%= 'selected' if params[:category] == 'running' %>>Running</option>
+              <option value="pickleball" <%= 'selected' if params[:category] == 'pickleball' %>>Pickleball</option>
+              <option value="surfing" <%= 'selected' if params[:category] == 'surfing' %>>Surfing</option>
+              <option value="yoga" <%= 'selected' if params[:category] == 'yoga' %>>Yoga</option>
+              <option value="other" <%= 'selected' if params[:category] == 'other' %>>Other</option>
+            </select>
+          </div>
+
+          <!-- Filter by price -->
+          <div class="col-md-2">
+            <select class="form-select" name="price">
+              <option value="">Price</option>
+              <option value="free" <%= 'selected' if params[:price] == 'free' %>>Free</option>
+              <option value="paid" <%= 'selected' if params[:price] == 'paid' %>>Paid</option>
+            </select>
+          </div>
+          <!-- Search by location -->
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="location" placeholder="Search by location" aria-label="Search by location" value="<%= params[:location] %>">
+          </div>
+          <!-- Sort by options -->
+          <div class="col-md-2">
+            <select class="form-select" name="sort_by">
+              <option value="">Sort By</option>
+              <option value="start" <%= 'selected' if params[:sort_by] == 'start' %>>Date</option>
+              <option value="location" <%= 'selected' if params[:sort_by] == 'location' %>>Location</option>
+            </select>
+          </div>
+          <!-- Submit button -->
+          <div class="col-md-2">
+            <button class="btn btn-dark w-100" type="submit">
+              <i class="fas fa-search"></i> Search
+            </button>
+          </div>
         </div>
       </form>
+
       <h1 class="text-center mb-3">All Available Activities</h1>
 
       <div>
         <% @activities.each do |activity| %>
-            <div class="card shadow-sm activity-card mb-3">
-              <div class="card-body">
-                <h2 class="card-title"><%= link_to activity.title, activity_path(activity)%></h2>
-                <ul class="list-unstyled">
-                  <li><strong>Location:</strong> <%= activity.location %></li>
-                  <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
-                  <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
-                  <li><strong>Price:</strong> <%= format_price(activity.price) %></li>
-                </ul>
-                <%= link_to "View Details", activity_path(activity), class: "btn btn-dark w-100" %>
-              </div>
+          <div class="card shadow-sm activity-card mb-3">
+            <div class="card-body">
+              <h2 class="card-title"><%= link_to activity.title, activity_path(activity) %></h2>
+              <ul class="list-unstyled">
+                <li><strong>Location:</strong> <%= activity.location %></li>
+                <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
+                <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
+                <li><strong>Price:</strong> <%= format_price(activity.price) %></li>
+              </ul>
+              <%= link_to "View Details", activity_path(activity), class: "btn btn-dark w-100" %>
             </div>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<!-- JavaScript to show/hide the calendar date picker -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const dateFilter = document.getElementById('date-filter');
+    const customDatePicker = document.getElementById('custom-date-picker');
+    const customDate = document.getElementById('custom-date');
+
+    dateFilter.addEventListener('change', function() {
+      if (this.value === 'select-date') {
+        customDatePicker.style.display = 'block';
+        customDate.setAttribute('name', 'date');
+        customDate.value = '';
+        dateFilter.setAttribute('name', 'date_option');
+      } else {
+        customDatePicker.style.display = 'none';
+        customDate.removeAttribute('name');
+        dateFilter.setAttribute('name', 'date');
+      }
+    });
+
+    // Ensure the calendar date picker is shown if a custom date is already selected
+    if (customDate.value !== '') {
+      customDatePicker.style.display = 'block';
+      dateFilter.setAttribute('name', 'date_option');
+    }
+  });
+</script>
