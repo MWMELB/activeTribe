@@ -76,3 +76,236 @@ h2 {
 .card-body {
   padding: 0.5rem;
 }
+
+// for map :)
+.popup-content a.btn-view-details {
+  display: center;
+  padding: 3px 15px;
+  background-color: #7DF600;
+  color: white;
+  text-decoration: none;
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.popup-content {
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #333;
+  max-width: 300px;
+}
+
+
+.popup-title {
+  color: #2c3e50;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.popup-location {
+  color: #6c7576;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  margin-bottom: 0%;
+}
+
+.popup-date {
+  color: #95a5a6;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 12px;
+  margin-top: 0%;
+
+}
+
+.your-location-popup {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 14px;
+  color: #7DF600;
+  text-align: center;
+}
+ //map
+
+
+ //activity-show
+body {
+
+  color: #333;
+}
+
+
+.activity-title {
+  font-family: "Asap Condensed", sans-serif;
+  font-size: 2.5rem;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+
+.activity-card-image-banner {
+  height: 415px;
+  object-fit: cover;
+}
+
+
+.btn {
+  font-family: 'Comfortaa', sans-serif;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+.btn-secondary {
+  background-color: #7DF600;
+  border: none;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #6cc500;
+}
+
+.btn-info {
+  background-color: #3498db;
+  border: none;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #2980b9;
+}
+
+.btn-success {
+  background-color: #2ecc71;
+  border: none;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #27ae60;
+}
+
+
+.btn-icon {
+  color: #7DF600;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.btn-icon:hover {
+  color: #1abc9c;
+}
+
+
+#map {
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;
+}
+
+
+.card {
+  border-radius: 10px;
+  border: none;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #333;
+}
+
+.card-text strong {
+  color: #7DF600;
+}
+
+
+hr {
+  border: 0;
+  border-top: 2px solid #eee;
+  margin: 20px 0;
+}
+
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+
+@media (max-width: 768px) {
+  .activity-title {
+    font-size: 2rem;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .card-text {
+    font-size: 0.9rem;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+}
+
+
+.activity-photo-container {
+  position: relative;
+  width: 100%;
+  height: 415px;
+}
+
+.activity-card-image-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.activity-title-overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-family: 'Asap Condensed', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+  padding: 10px;
+  text-transform: uppercase;
+  max-width: 70%;
+  width: auto;
+  text-shadow: 2px 2px 5px rgba(92, 92, 92, 0.5);
+}
+
+@media (max-width: 768px) {
+  .activity-title-overlay {
+    font-size: 2.5rem;
+    bottom: 5px;
+    left: 10px;
+  }
+}
+
+//show-activity
