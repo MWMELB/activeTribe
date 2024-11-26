@@ -4,11 +4,51 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities = policy_scope(Activity)
+
     Rails.logger.debug "Search term: #{params[:search]}"
+
+    # Filter by search keyword
     if params[:search].present?
-      @activities = @activities.where('title ILIKE ?', "%#{params[:search]}%")
+      @activities = @activities.where('title ILIKE ? OR description ILIKE ?', "%#{params[:search]}%", "%#{params[:search]}%")
     end
-  end
+
+    # Filter by date
+    if params[:date].present?
+      if params[:date] == Date.today.to_s
+        @activities = @activities.where(start: Date.today.beginning_of_day..Date.today.end_of_day)
+      elsif params[:date] == Date.tomorrow.to_s
+        @activities = @activities.where(start: Date.tomorrow.beginning_of_day..Date.tomorrow.end_of_day)
+      elsif params[:custom_date].present?
+        @activities = @activities.where(start: params[:custom_date].to_date.beginning_of_day..params[:custom_date].to_date.end_of_day)
+      end
+    end
+
+    # Filter by activity type
+    if params[:category].present?
+      if params[:category] == 'other'
+        predefined_categories = ['basketball', 'tennis', 'hike', 'running', 'pickleball', 'surfing', 'yoga'] # Add more categories as needed
+        @activities = @activities.where.not(category: predefined_categories)
+      else
+        @activities = @activities.where(category: params[:category])
+      end
+    end
+
+
+    # Filter by price (free/paid)
+    if params[:price].present?
+      @activities = @activities.where(price: params[:price] == 'free' ? 0 : 1..Float::INFINITY)
+    end
+
+    # Sort by
+    if params[:sort_by].present?
+      @activities = @activities.order(params[:sort_by])
+    end
+
+    # Filter by location
+    if params[:location].present?
+      @activities = @activities.near(params[:location], 50) # 50 km radius
+    end
+end
 
   def my_activities
     @activities = Activity.where( user: current_user )
