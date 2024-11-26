@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get '/:username/activities', to: 'activities#my_activities', as: :my_activities
+  get '/activities', to: 'activities#my_activities', as: :default_activities
+
   get '/:username/groups', to: 'group_users#index', as: :my_groups
+  get '/groups', to: 'group_users#index', as: :default_groups
 
   resources :activities do
     resources :bookings, only: [:index] do
