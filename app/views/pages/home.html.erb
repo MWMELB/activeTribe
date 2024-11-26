@@ -60,21 +60,29 @@ function initializeMap(longitude, latitude) {
 
   new mapboxgl.Marker()
     .setLngLat([longitude, latitude])
-    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<b>Your Location</b>"))
+    .setPopup(new mapboxgl.Popup({ offset: 25 })
+        .setHTML("<div class='your-location-popup'><b>I'm Here!</b></div>"))
     .addTo(map);
 
-  <% @activities.each do |activity| %>
-    <% if activity.latitude.present? && activity.longitude.present? %>
+   <% @activities.each do |activity| %>
+  <% if activity.latitude.present? && activity.longitude.present? %>
 
-      var marker = new mapboxgl.Marker()
-        .setLngLat([<%= activity.longitude %>, <%= activity.latitude %>])
-        .addTo(map);
-      var popupContent = "<b><%= activity.title %></b><br><%= activity.location %><br><%= activity.start.strftime('%d %b %Y') %><br>" +
-                         "<a href='<%= activity_path(activity) %>'>View Details</a>";
-      var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupContent);
-      marker.setPopup(popup);
-    <% end %>
+    var marker = new mapboxgl.Marker()
+      .setLngLat([<%= activity.longitude %>, <%= activity.latitude %>])
+      .addTo(map);
+
+    var popupContent = "<div class='popup-content'>" +
+                   "<b class='popup-title'>" + "<%= activity.title %>" + "</b>" +
+                   "<br><span class='popup-location'>" + "<%= activity.location %>" + "</span>" +
+                   "<br><span class='popup-date'>" + "<%= activity.start.strftime('%d %b %Y') %>" + "</span>" +
+                   "<br><a href='<%= activity_path(activity) %>' class='btn-view-details'> Join Now </a>" +
+                   "</div>";
+
+    var popup = new mapboxgl.Popup({ offset: 25 }).setHTML(popupContent);
+    marker.setPopup(popup);
+
   <% end %>
+<% end %>
 }
 
 function onGeolocationSuccess(position) {
