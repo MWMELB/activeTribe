@@ -9,11 +9,8 @@
           <div class="alert alert-danger" role="alert" style="padding: 0.5rem 1rem; margin-bottom: 1.5rem;">
             <small>
             <ul class="mb-0" style="margin-bottom: 1rem;">
-              <% resource.errors.full_messages.each do |message| %>
+              <% resource.errors.full_messages.uniq.each do |message| %>
                 <li><%= message %></li>
-              <% end %>
-              <% if resource.errors[:terms].any? %>
-                <li><%= resource.errors[:terms].first %></li>
               <% end %>
             </ul>
             </small>
@@ -53,7 +50,7 @@
 
           <!-- Agreement Checkbox -->
           <div class="form-check mb-4">
-            <%= f.check_box :terms, class: "form-check-input" %>
+            <%= f.check_box :terms, { class: "form-check-input" }, '1', '0' %>
             <%= f.label :terms, "I agree to activeTribe's Privacy Policy and Terms of Use", class: "form-check-label" %>
           </div>
 
