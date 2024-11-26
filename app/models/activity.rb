@@ -8,4 +8,12 @@ class Activity < ApplicationRecord
 
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
+
+  scope :search, ->(keyword) { where("title ILIKE ? OR description ILIKE ?", "%#{keyword}%", "%#{keyword}%") }
+  scope :by_date, ->(date) { where(start: date.beginning_of_day..date.end_of_day) }
+  scope :by_category, ->(category) { where(category: category) }
+  scope :free_or_paid, ->(price_type) { where(price: price_type == 'free' ? 0 : 1..Float::INFINITY) }
+  scope :sorted_by, ->(sort_by) { order(sort_by) }
+  scope :near_location, ->(location) { near(location, 50) } # 50 km radius
+
 end

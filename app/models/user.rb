@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :activities, through: :bookings
 
   has_many :booked_activities, through: :bookings, source: :activity
-  validates :first_name, :last_name, :birth_date, :email, :username, presence: true
+  validates :first_name, :last_name, :birth_date, :email, presence: true
 
   # Attribute for terms agreement (sign-up page)
   attr_accessor :terms
@@ -24,7 +24,7 @@ class User < ApplicationRecord
   private
 
   def terms_accepted
-    errors.add(:terms, "must be accepted") unless terms == true
+    errors.add(:base, "Terms must be accepted") unless ActiveRecord::Type::Boolean.new.cast(terms)
   end
 
   def name

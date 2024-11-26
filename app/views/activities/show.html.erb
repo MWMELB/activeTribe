@@ -53,6 +53,15 @@
             <p class="info-text">This is a placeholder text that can be replaced with your important information. Make sure to keep it concise and clear.</p>
           </div>
 
+        <h5><%= @activity.title %></h5>
+        <div class="d-flex justify-content-between my-4 show-buttons">
+          <% if policy(@activity).owner? %>
+            <%= link_to "Back to My Activities", my_activities_path(@activity.user), class: "btn btn-secondary me-2" %>
+          <% else %>
+            <%= link_to "Back to Activities", activities_path, class: "btn btn-secondary me-2" %>
+          <% end %>
+
+
           <div class="card-body">
           <div>
             <% if policy(@activity).owner? %>
