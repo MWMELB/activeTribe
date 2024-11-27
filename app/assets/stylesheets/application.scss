@@ -308,4 +308,66 @@ li {
   }
 }
 
+h5 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.show-text {
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 0px;
+}
+
+.list-unstyled li{
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 13px;
+  margin: 2px;
+}
+
+.show-icon {
+  margin-right: 10px;
+  font-size: 15px;
+}
+
+.info-box {
+  background-color: #f2f2f2;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  max-height: 200px;
+}
+
+.info-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.info-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.5rem;
+  color: #666;
+
+}
+
+.rounded-button {
+  border-radius: 20px;
+}
+
+.location {
+  font-size: 13px;
+}
+
+
+
+
+
+
+
+
 //show-activity
