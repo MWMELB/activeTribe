@@ -55,7 +55,8 @@ activities.each_with_index do |activity, index|
     # Price range from free to $100
     price: rand(0..20) * 5,
     # Capacity range from 10 to unlimited
-    capacity: activity_capacity.sample
+    capacity: activity_capacity.sample,
+    level: rand(0..2)
   )
   new_activity.photo.attach(io: file, filename: "#{activity}.jpg", content_type: "image/png")
   new_activity.save
