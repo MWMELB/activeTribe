@@ -6,6 +6,15 @@
                 placeholder: "Enter title" %>
     <%= f.input :category,
                 label: "Activity type",
+                placeholder: "Enter sport",
+                collection: [
+                'American Rules Football',
+                'Archery',
+                'Australian Rules Football',
+                'Badminton (Doubles)',],
+                include_blank: false %>
+    <%= f.input :level,
+                label: "Activity level",
                 placeholder: "Enter type" %>
     <%= f.input :description,
                 placeholder: "Description" %>

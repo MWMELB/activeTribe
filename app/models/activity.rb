@@ -4,8 +4,8 @@ class Activity < ApplicationRecord
   has_many :activity_comments, dependent: :destroy
   has_many :bookers, through: :bookings, source: :user
   has_one_attached :photo
-  validates :title, :category, :description, :location, :start, :duration, :price, :capacity, presence: true
-
+  validates :title, :category, :description, :location, :start, :duration, :price, :capacity, :level, presence: true
+  enum :level, { Beginner: 0, Intermediate: 1, Advanced: 2 }
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 

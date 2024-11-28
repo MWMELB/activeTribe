@@ -124,6 +124,6 @@ end
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :photo, :description, :location, :price, :start, :duration, :sport, :category, :capacity )
+    params.require(:activity).permit(:title, :photo, :description, :location, :price, :start, :duration, :sport, :category, :capacity, :level )
   end
 end

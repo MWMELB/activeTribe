@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_21_230426) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_28_082522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_21_230426) do
     t.string "category"
     t.integer "capacity"
     t.text "description"
+    t.integer "level"
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
