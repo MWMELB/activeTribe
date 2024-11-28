@@ -93,10 +93,20 @@
 
 <script>
 
-  mapboxgl.accessToken = 'YOpk.eyJ1IjoibnJvbWFzYW50YSIsImEiOiJjbTE5MjYzNjcxMDdjMmptenN2M2F3ZzZnIn0.2iI2J6g6qNHHZ4gKxZFaqw';
+<!-- In your HTML (e.g., application.html.erb or your view) -->
+<div id="map" style="width: 100%; height: 400px;"></div>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.9.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.9.0/mapbox-gl.css" rel="stylesheet" />
+
+<script>
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoibnJvbWFzYW50YSIsImEiOiJjbTE5MjYzNjcxMDdjMmptenN2M2F3ZzZnIn0.2iI2J6g6qNHHZ4gKxZFaqw';
 
   var latitude = <%= @activity.latitude %>;
   var longitude = <%= @activity.longitude %>;
+
+  console.log(latitude, longitude);
 
   var map = new mapboxgl.Map({
     container: 'map',
@@ -110,8 +120,6 @@
     .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<b><%= @activity.title %></b><br><%= @activity.location %>"))
     .addTo(map);
 </script>
-
-
 
 
 <% if policy(@activity).owner? %>
