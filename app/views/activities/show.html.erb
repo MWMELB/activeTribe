@@ -74,17 +74,8 @@
 
 
 
-
-    </div>
-
-    <div class="container mt-4 px-3 pb-4">
-
-  </div>
-</div>
-
-
-      <script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
-      <link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" rel="stylesheet">
 
 <script>
 
@@ -115,15 +106,3 @@
     .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<b><%= @activity.title %></b><br><%= @activity.location %>"))
     .addTo(map);
 </script>
-
-
-<% if policy(@activity).owner? %>
-            <%= link_to "Back to My Activities", my_activities_path(@activity.user.username), class: "btn btn-secondary me-2" %>
-          <% else %>
-            <%= link_to "Join Now", activities_path, class: "btn btn-secondary me-2" %>
-          <% end %>
-
-      </div>
-    </div>
-  </div>
-</div>
