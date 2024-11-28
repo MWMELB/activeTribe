@@ -4,8 +4,8 @@
     <% @bookings.each do |booking| %>
       <div class="card mb-4">
         <div class="card-body d-flex justify-content-between">
-          <div class="">
-            <h5><%= link_to booking.activity.title, activity_path(booking.activity) %></h5>
+          <div>
+            <h5 class="card-title"><%= link_to booking.activity.title, activity_path(booking.activity) %></h5>
             <p><strong>Date:</strong> <%= booking.activity.start.strftime("%A, %d %b %Y %l:%M %p") %></p>
             <p><strong>Location:</strong> <%= booking.activity.location %></p>
             <p><strong>Status:</strong> <%= booking.status.capitalize %></p>
