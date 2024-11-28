@@ -1,3 +1,12 @@
+.card {
+  border-radius: 8px;
+  border: none;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
 .card-title {
   a {
     text-decoration: none;
@@ -5,8 +14,22 @@
   }
 }
 
-.activity-card-image-banner {
-  height: 250px;
+.card-link {
+  text-decoration: none;
+}
+
+.activity-card-image {
   object-fit: cover;
   object-position: center;
+  width: 100%;
+}
+
+.activity-card-homepage {
+  h4 {
+    font-size: 0.9rem
+  }
+  .card-text {
+    font-size: 0.6rem;
+    color: grey;
+  }
 }
