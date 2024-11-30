@@ -1,131 +1,56 @@
-<%= simple_form_for (@activity) do |f| %>
-  <div class="activity-form-box p-3 mt-5 mb-3 mx-3">
-    <h3>Event overview</h3>
-    <%= f.input :title,
-                label: "Title",
-                placeholder: "Enter title" %>
+<%= simple_form_for(@activity) do |f| %>
+  <div class="activity-form-box p-8 mt-20 mb-20 mx-auto">
+    <h3 class="form-header">Start Your Own Adventure</h3>
+
+    <%= f.input :title, label: "Title", placeholder: "Enter event title", input_html: { class: "form-input" } %>
+
     <%= f.input :category,
-                label: "Activity type",
+                label: "Activity Type",
                 collection: [
-                'American Rules Football',
-                'Archery',
-                'Australian Rules Football',
-                'Badminton (Doubles)',
-                'Bandy',
-                'Baseball',
-                'Basketball',
-                'Beach Volleyball',
-                'BMX Racing',
-                'Bodyboard',
-                'Bodybuilding',
-                'Bouldering',
-                'Boxing (Fitness/Training)',
-                'Brazilian Jiu-Jitsu (BJJ)',
-                'Capoeira',
-                'Camping',
-                'Canoe Polo',
-                'Canoeing',
-                'Cliff Diving (Cliff Jumping)',
-                'Caving (Spelunking)',
-                'Cricket',
-                'CrossFit',
-                'Cycle Cross',
-                'Cycling (Road)',
-                'Dance Fitness (Dance Aerobics)',
-                'Diving (Scuba Diving)',
-                'Fencing',
-                'Field Hockey',
-                'Fishing',
-                'Fitness Bootcamp',
-                'Floorball',
-                'Frisbee Golf',
-                'Football (Soccer)',
-                'Futsal',
-                'Gaelic Football',
-                'Golf',
-                'Handball',
-                'HIIT',
-                'Hiking',
-                'Ice Hockey',
-                'Ice Skating',
-                'Jet Skiing',
-                'Judo',
-                'Karate',
-                'Kettlebell Training',
-                'Kickboxing',
-                'Kung Fu',
-                'Krav Maga',
-                'Knee Boarding',
-                'Lacrosse',
-                'Marathon Running',
-                'Mixed Martial Arts (MMA)',
-                'Mountain Biking',
-                'Muay Thai',
-                'Mountaineering',
-                'Netball',
-                'Obstacle Course Racing',
-                'Pilates',
-                'Powerlifting',
-                'Rafting',
-                'Resistance Training (Strength Training)',
-                'Rock Climbing',
-                'Rowing',
-                'Running (Trail)',
-                'Sailing',
-                'Savate',
-                'Shootfighting',
-                'Skydiving',
-                'Snowboarding',
-                'Sledding',
-                'Snorkeling',
-                'Snowshoeing',
-                'Sport Fishing',
-                'Stand-Up Paddleboarding (SUP)',
-                'Stargazing',
-                'Surf Skating',
-                'Surfing',
-                'Synchronized Swimming',
-                'Taekwondo',
-                'Team Workout',
-                'Tennis',
-                'Tchoukball',
-                'Trail Running',
-                'Tabata Training',
-                'Touch Rugby',
-                'Triathlon',
-                'Wake Surfing',
-                'Wakeboarding',
-                'Water Polo',
-                'Weightlifting',
-                'Wing Chun',
-                'Wrestling',
-                'Zumba',
-                'Zip Lining',
-                'Windsurfing',
-                'Bungee Jumping',],
-                prompt: "Select an activity", input_html: { class: "select2", id: "activity_category" } %>
-    <%= f.input :level,
-                label: "Activity level",
-                placeholder: "Enter type" %>
-    <%= f.input :description,
-                placeholder: "Description" %>
-    <%= f.input :price %>
-    <%= f.input :capacity, step: "10" %>
+                  'American Rules Football', 'Archery', 'Australian Rules Football',
+                  'Badminton (Doubles)', 'Bandy', 'Baseball', 'Basketball', 'Beach Volleyball',
+                  'BMX Racing', 'Bodyboard', 'Bodybuilding', 'Bouldering', 'Boxing (Fitness/Training)',
+                  'Brazilian Jiu-Jitsu (BJJ)', 'Capoeira', 'Camping', 'Canoe Polo', 'Canoeing',
+                  'Cliff Diving (Cliff Jumping)', 'Caving (Spelunking)', 'Cricket', 'CrossFit', 'Cycle Cross',
+                  'Cycling (Road)', 'Dance Fitness (Dance Aerobics)', 'Diving (Scuba Diving)', 'Fencing',
+                  'Field Hockey', 'Fishing', 'Fitness Bootcamp', 'Floorball', 'Frisbee Golf', 'Football (Soccer)',
+                  'Futsal', 'Gaelic Football', 'Golf', 'Handball', 'HIIT', 'Hiking', 'Ice Hockey', 'Ice Skating',
+                  'Jet Skiing', 'Judo', 'Karate', 'Kettlebell Training', 'Kickboxing', 'Kung Fu', 'Krav Maga',
+                  'Knee Boarding', 'Lacrosse', 'Marathon Running', 'Mixed Martial Arts (MMA)', 'Mountain Biking',
+                  'Muay Thai', 'Mountaineering', 'Netball', 'Obstacle Course Racing', 'Pilates', 'Powerlifting',
+                  'Rafting', 'Resistance Training (Strength Training)', 'Rock Climbing', 'Rowing', 'Running (Trail)',
+                  'Sailing', 'Savate', 'Shootfighting', 'Skydiving', 'Snowboarding', 'Sledding', 'Snorkeling',
+                  'Snowshoeing', 'Sport Fishing', 'Stand-Up Paddleboarding (SUP)', 'Stargazing', 'Surf Skating',
+                  'Surfing', 'Synchronized Swimming', 'Taekwondo', 'Team Workout', 'Tennis', 'Tchoukball',
+                  'Trail Running', 'Tabata Training', 'Touch Rugby', 'Triathlon', 'Wake Surfing', 'Wakeboarding',
+                  'Water Polo', 'Weightlifting', 'Wing Chun', 'Wrestling', 'Zumba', 'Zip Lining', 'Windsurfing',
+                  'Bungee Jumping'],
+                prompt: "Select an activity",
+                input_html: { class: "form-select" } %>
+
+
+    <%= f.input :level, label: "Activity Level", placeholder: "Enter activity level", input_html: { class: "form-input" } %>
+
+    <%= f.input :description, placeholder: "Description of the activity", input_html: { class: "form-input" } %>
+
+    <%= f.input :price, input_html: { class: "form-input" } %>
+
+    <%= f.input :capacity, step: "10", input_html: { class: "form-input" } %>
   </div>
 
-  <div class="activity-form-box p-3 mx-3">
-    <%= f.input :start,
-                label: "Date and time" %>
-    <%= f.input :duration,
-                label: "Duration (minutes)",
-                placeholder: "Enter duration" %>
-    <%= f.input :location,
-                placeholder: "Enter location" %>
+  <div class="activity-form-box p-8 mx-auto">
+
+    <%= f.input :start, label: "Start Date and Time", input_html: { id: "start-datepicker", class: "form-input" } %>
+
+
+    <%= f.input :duration, label: "Duration (minutes)", placeholder: "Enter duration", input_html: { class: "form-input" } %>
+
+    <%= f.input :location, placeholder: "Enter location", input_html: { class: "form-input" } %>
   </div>
 
-  <div class="activity-form-box mx-3 p-3 my-3">
-    <%= f.input :photo, as: :file, label: "Upload a Photo" %>
+  <div class="activity-form-box p-8 my-5 mt-2 mx-auto">
+    <%= f.input :photo, as: :file, label: "Upload a Photo", input_html: { class: "form-file" } %>
   </div>
 
-  <%= f.button :submit, class: "btn btn-dark w-100 mb-5" %>
+  <%= f.button :submit, class: "btn-submit" %>
 <% end %>

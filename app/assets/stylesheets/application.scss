@@ -15,7 +15,9 @@
 
 @import "components/statusbar";
 @import "components/_footer";
-@import "activities";
+@import "pages/_searchactivity";
+@import "pages/createactivity";
+
 
 body {
   background-color: white;
