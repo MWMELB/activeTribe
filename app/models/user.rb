@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :groups, dependent: :destroy
   has_many :group_users, dependent: :destroy
+  has_many :group_posts, dependent: :destroy
   has_many :group_comments, dependent: :destroy
   has_many :activity_comments, dependent: :destroy
   has_many :groups, through: :group_users

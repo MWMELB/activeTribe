@@ -15,5 +15,4 @@ class Activity < ApplicationRecord
   scope :free_or_paid, ->(price_type) { where(price: price_type == 'free' ? 0 : 1..Float::INFINITY) }
   scope :sorted_by, ->(sort_by) { order(sort_by) }
   scope :near_location, ->(location) { near(location, 50) } # 50 km radius
-
 end

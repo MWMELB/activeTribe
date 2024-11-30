@@ -11,8 +11,8 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    @group_comments = @group.group_comments.includes(:user)
-    @comment = GroupComment.new
+    @group_posts = @group.group_posts.includes(:user)
+    @post = GroupPost.new
   end
 
   def new
@@ -25,6 +25,7 @@ class GroupsController < ApplicationController
     @group.user = current_user
     authorize @group
     if @group.save
+      @group.group_users.create(user: current_user)
       flash[:notice] = "Group created successfully!"
       redirect_to group_path(@group)
     else
