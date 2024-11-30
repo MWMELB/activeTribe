@@ -1,8 +1,12 @@
 <div class="container my-5 px-4 pb-4">
   <div class="row">
     <div class="col">
-      <h1><%= @group.name %></h1>
+      <div class="d-flex justify-content-between">
+        <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left"></i>'.html_safe, :back %></div>
+        <h3 class="px-2"><%= @group.name %></h3>
+      </div>
       <p><%= @group.description %></p>
+      <p><%= format_member(@group.members.count)%></p>
 
       <% if policy(@group).destroy? %>
         <!-- Only show the delete button if the current user is the owner of the group -->
@@ -11,7 +15,7 @@
         <%= button_to "Join us", join_group_path(@group), method: :post, class: "btn btn-success" %>
       <% else %>
         <!-- Show the "Leave Group" button if the user is a member -->
-        <%= button_to "Leave Group", leave_group_path(@group), method: :delete, class: "btn btn-danger" %>
+        <%= button_to "Leave Group", leave_group_path(@group), method: :delete, data: { turbo_confirm: "Are you sure you want to leave this group?" }, class: "btn btn-danger" %>
       <% end %>
 
       <!-- Group Photo -->
@@ -24,16 +28,18 @@
       <h2 class="mt-5">Recent Posts</h2>
 
       <!-- Comment Form -->
-      <div class="mt-4">
-        <h3>Leave a comment:</h3>
-        <%= form_with model: @comment, url: group_group_comments_path(@group), method: :post, local: true do |form| %>
-          <div class="form-group">
-            <%= form.label :content, "Your Comment" %>
-            <%= form.text_area :content, class: "form-control", rows: 3 %>
-          </div>
-          <%= form.submit "Post Comment", class: "btn btn-primary" %>
-        <% end %>
-      </div>
+      <% if policy(@group).comment? %>
+        <div class="mt-4">
+          <h3>Leave a comment:</h3>
+          <%= form_with model: @comment, url: group_group_comments_path(@group), method: :post, local: true do |form| %>
+            <div class="form-group">
+              <%= form.label :content, "Your Comment" %>
+              <%= form.text_area :content, class: "form-control", rows: 3 %>
+            </div>
+            <%= form.submit "Post Comment", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      <% end %>
 
       <!-- Comments Section -->
       <div class="mt-5">
@@ -41,7 +47,7 @@
           <% @group_comments.each do |comment| %>
             <div class="card mb-3">
               <div class="card-body">
-                <p><strong><%= comment.user.first_name %> <%= comment.user.last_name %>:</strong> <%= comment.content %></p>
+                <p><strong><%= comment.user.username %>:</strong> <%= comment.content %></p>
                 <p><small><%= time_ago_in_words(comment.created_at) %> ago</small></p>
 
                 <!-- Optional: Delete Comment Button for the Author -->

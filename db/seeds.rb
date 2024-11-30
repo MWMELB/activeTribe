@@ -1,5 +1,8 @@
 require "faker"
 
+puts "Emptying GROUP_COMMENTS database..."
+GroupComment.destroy_all
+
 puts "Emptying GROUP_USERS database..."
 GroupUser.destroy_all
 
@@ -20,7 +23,7 @@ for i in 1..5 do
   User.create(
     first_name: first.downcase,
     last_name: last.downcase,
-    username: "#{first}_#{last}",
+    username: "#{first.downcase}_#{last.downcase}",
     birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
     email: "user#{i}@gmail.com",
     password: "password",
