@@ -13,15 +13,16 @@ class ActivitiesController < ApplicationController
     end
 
     # Filter by date
-    if params[:date].present?
-      if params[:date] == Date.today.to_s
-        @activities = @activities.where(start: Date.today.beginning_of_day..Date.today.end_of_day)
-      elsif params[:date] == Date.tomorrow.to_s
-        @activities = @activities.where(start: Date.tomorrow.beginning_of_day..Date.tomorrow.end_of_day)
-      elsif params[:custom_date].present?
-        @activities = @activities.where(start: params[:custom_date].to_date.beginning_of_day..params[:custom_date].to_date.end_of_day)
-      end
-    end
+        if params[:date].present?
+          if params[:date] == Date.today.to_s
+            @activities = @activities.where(start: Date.today.beginning_of_day..Date.today.end_of_day)
+          elsif params[:date] == Date.tomorrow.to_s
+            @activities = @activities.where(start: Date.tomorrow.beginning_of_day..Date.tomorrow.end_of_day)
+          elsif params[:custom_date].present?
+            @activities = @activities.where(start: params[:custom_date].to_date.beginning_of_day..params[:custom_date].to_date.end_of_day)
+          end
+        end
+
 
     # Filter by activity type
     if params[:category].present?

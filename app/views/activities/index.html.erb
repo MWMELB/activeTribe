@@ -7,6 +7,7 @@
           <div class="col-md-4">
             <input type="text" class="form-control" id="search-bar" name="search" placeholder="Search by keywords..." aria-label="Search activities" value="<%= params[:search] %>">
           </div>
+
           <!-- Date filter dropdown -->
           <div class="filter-container">
           <div class="col-md-3">
@@ -92,24 +93,25 @@
     const dateFilter = document.getElementById('date-filter');
     const customDatePicker = document.getElementById('custom-date-picker');
     const customDate = document.getElementById('custom-date');
+    const filterContainer = document.querySelector('.filter-container');
 
     dateFilter.addEventListener('change', function() {
       if (this.value === 'select-date') {
         customDatePicker.style.display = 'block';
-        customDate.setAttribute('name', 'date');
+        customDate.setAttribute('name', 'custom_date');
         customDate.value = '';
-        dateFilter.setAttribute('name', 'date_option');
+        filterContainer.classList.add('custom-date-active');
       } else {
         customDatePicker.style.display = 'none';
         customDate.removeAttribute('name');
-        dateFilter.setAttribute('name', 'date');
+        filterContainer.classList.remove('custom-date-active');
       }
     });
 
-    // Ensure the calendar date picker is shown if a custom date is already selected
+
     if (customDate.value !== '') {
       customDatePicker.style.display = 'block';
-      dateFilter.setAttribute('name', 'date_option');
+      filterContainer.classList.add('custom-date-active');
     }
   });
 </script>
