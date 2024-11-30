@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   post "activities/:id/book", to: "bookings#create", as: :book_activity
 
+
   # BOOKINGS PAGES
   resources :bookings do
     collection do

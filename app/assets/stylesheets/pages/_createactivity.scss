@@ -1,0 +1,173 @@
+// Variables for colors, spacing, and typography
+$primary-color: #7DF600; // Primary color (blue)
+$secondary-color: #6c757d; // Secondary text color (gray)
+$background-color: #f9f9f9; // Light background color for form
+$input-background: #f3f6fb; // Light blue background for inputs
+$input-focus-background: #fff; // White background when input is focused
+$box-shadow-color: rgba(0, 0, 0, 0.1); // Soft shadow color for depth
+$border-radius: 12px; // Rounded corners for form elements
+$input-padding: 16px;
+$input-font-size: 16px;
+$button-padding: 14px 30px;
+$transition-duration: 0.3s;
+$header-font-size: 1.6rem; // Header font size
+$label-font-size: 14px; // Label font size
+
+// General Styles
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: $background-color;
+  color: #333;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+// Form container
+.activity-form-box {
+  margin-top: 5rem;
+  background-color: #fff;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 16px $box-shadow-color;
+  padding: $input-padding;
+  margin-bottom: 30px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all $transition-duration ease;
+  border: none;
+
+  &:hover {
+    box-shadow: 0 10px 20px rgba(164, 163, 163, 0.15); // Deeper shadow on hover
+  }
+}
+
+// Form header
+.form-header {
+  font-size: $header-font-size;
+  font-weight: 700;
+  color: $primary-color;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+// Input Fields
+.form-input,
+.form-select,
+.form-file {
+  width: 100%;
+  padding: $input-padding;
+  font-size: $input-font-size;
+  border-radius: $border-radius;
+  border: 1px solid #e0e0e0;
+  background-color: $input-background;
+  margin-bottom: 20px;
+  transition: all $transition-duration ease;
+  box-sizing: border-box;
+
+  // Focus state styling
+  &:focus {
+    background-color: $input-focus-background;
+    border-color: $primary-color;
+    box-shadow: 0 0 8px rgba($primary-color, 0.2);
+    outline: none;
+  }
+
+  // Input text color for better readability
+  color: #333;
+}
+
+// File input (Custom Styling)
+.form-file {
+  display: block;
+  padding: 14px;
+  font-size: 16px;
+  background-color: #f7f8fb;
+  border: 1px solid #ccc;
+  border-radius: $border-radius;
+  cursor: pointer;
+  color: #333;
+  transition: background-color $transition-duration;
+
+  &:hover {
+    background-color: #e6ebf5;
+  }
+
+  input[type="file"] {
+    display: none;
+  }
+}
+
+// Label Styles
+label {
+  font-size: $label-font-size;
+  font-weight: 500;
+  color: $secondary-color;
+  margin-bottom: 8px;
+  display: block;
+}
+
+// Submit Button Styling
+.btn-submit {
+  display: inline-block;
+  background: linear-gradient(135deg, $primary-color, darken($primary-color, 10%));
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: $button-padding;
+  border-radius: $border-radius;
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all $transition-duration ease;
+  margin-bottom: 5rem;
+
+  &:hover {
+    background: linear-gradient(135deg, darken($primary-color, 10%), darken($primary-color, 20%));
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+// Form layout responsiveness
+@media (max-width: 768px) {
+  .activity-form-box {
+    padding: 20px;
+  }
+
+  .form-header {
+    font-size: 1.4rem;
+  }
+
+  .btn-submit {
+    font-size: 14px;
+    padding: 12px 25px;
+  }
+}
+
+// Spacing between form sections
+.activity-form-box + .activity-form-box {
+  margin-top: 30px;
+}
+
+// Add subtle animations to inputs when focused
+.form-input,
+.form-select {
+  &::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+}
+
+
+.flatpickr-calendar {
+  z-index: 9999 !important;
+}
