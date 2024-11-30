@@ -35,7 +35,7 @@ puts "Creating 5 activities..."
 users = User.all
 melb_locations = ["Carlton, Victoria", "Southbank, Victoria", "Melbourne, Victoria", "Docklands, Victoria", "Fitzroy, Victoria"]
 activity_capacity = [10, 20, 30, 50, 100]
-activities = ["pilates", "running", "pickleball", "surfing", "basketball", "hike"]
+activities = ["pilates", "running", "pickleball", "surfing", "basketball", "hiking"]
 
 activities.each_with_index do |activity, index|
   puts "Creating activity #{index + 1}"
@@ -67,11 +67,16 @@ activities.each_with_index do |activity, index|
 
   if index.odd?
     puts "Creating group #{index}"
-    Group.create(
+    file_path_group = Rails.root.join("app/assets/images/#{activity}-2.jpg")
+    file = File.open(file_path_group)
+    new_group = Group.create(
       user: owner,
       name: "#{Faker::Team.creature} #{activity} club",
-      description: "We love #{activity} 🤩"
+      description: "We love #{activity} 🤩 #{Faker::Lorem.paragraph(sentence_count: 5)}"
     )
+    new_group.photo.attach(io: file, filename: "#{activity}-2.jpg", content_type: "image/png")
+    new_group.save
+    file.close
   end
 end
 

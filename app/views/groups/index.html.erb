@@ -19,7 +19,7 @@
         <div class="card my-3">
           <div class="card-body">
             <h2 class="card-title"><%= link_to group.name, group_path(group)%></h2>
-              <%= group.description %>
+              <%= group.description[0..80] %>...
               <div class="d-flex justify-content-end">
                 <% if policy(group).owner? || GroupUser.find_by(group: group, user: current_user) %>
                   <div class="subtitle"><em>You are already a member</em></div>

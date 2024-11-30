@@ -1,35 +1,58 @@
-<div class="container my-5 px-4 pb-4">
+<div class="container mt-5 px-4">
   <div class="row">
     <div class="col">
-      <div class="d-flex justify-content-between">
-        <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left"></i>'.html_safe, :back %></div>
-        <h3 class="px-2"><%= @group.name %></h3>
-      </div>
-      <p><%= @group.description %></p>
-      <p><%= format_member(@group.members.count)%></p>
 
-      <% if policy(@group).destroy? %>
-        <!-- Only show the delete button if the current user is the owner of the group -->
-        <%= link_to "Delete", @group, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this group?" }, class: "btn btn-danger" %>
-      <% elsif !GroupUser.find_by(group: @group, user: current_user) %>
-        <%= button_to "Join us", join_group_path(@group), method: :post, class: "btn btn-success" %>
-      <% else %>
-        <!-- Show the "Leave Group" button if the user is a member -->
-        <%= button_to "Leave Group", leave_group_path(@group), method: :delete, data: { turbo_confirm: "Are you sure you want to leave this group?" }, class: "btn btn-danger" %>
-      <% end %>
-
-      <!-- Group Photo -->
-      <% if @group.photo.attached? %>
-        <div class="mt-4">
-          <%= image_tag @group.photo, class: "img-fluid rounded" %>
+      <div class="group-title">
+        <div class="d-flex justify-content-between">
+          <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left"></i>'.html_safe, :back %></div>
+          <h3><%= @group.name %></h3>
         </div>
-      <% end %>
+      </div>
 
-      <h2 class="mt-5">Recent Posts</h2>
+    </div>
+  </div>
+</div>
+
+<div class="my-3">
+  <% if @group.photo.attached? %>
+    <%= image_tag @group.photo, class: "group-banner-image" %>
+  <% end %>
+</div>
+
+<div class="container px-4 pb-4">
+  <div class="row">
+    <div class="col">
+      <div class="group-btns d-flex justify-content-end">
+        <% if policy(@group).owner? %>
+          <div class="d-flex pt-2">
+            <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_group_path(@group), class: "btn-icon me-3" %>
+            <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, @group, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this group?" }, class: "btn-icon" %>
+          </div>
+        <% elsif GroupUser.find_by(group: @group, user: current_user) %>
+          <%= link_to '<i class="fa-solid fa-arrow-right-from-bracket"></i>'.html_safe, leave_group_path(@group), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to leave this group?" } %>
+        <% end %>
+      </div>
+
+      <div class="group-description card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <h5>About us</h5>
+            <p style="color: grey"><%= format_member(@group.members.count)%></p>
+          </div>
+          <p><%= @group.description %></p>
+        </div>
+      </div>
+    </div>
+
+    <% if !(policy(@group).owner? || GroupUser.find_by(group: @group, user: current_user)) %>
+      <%= button_to "Join us", join_group_path(@group), method: :post, class: "btn btn-secondary" %>
+    <% end %>
+
+      <h2 class="mt-3">Recent Posts</h2>
 
       <!-- Comment Form -->
       <% if policy(@group).comment? %>
-        <div class="mt-4">
+        <div class="mt-3">
           <h3>Leave a comment:</h3>
           <%= form_with model: @comment, url: group_group_comments_path(@group), method: :post, local: true do |form| %>
             <div class="form-group">
@@ -42,7 +65,7 @@
       <% end %>
 
       <!-- Comments Section -->
-      <div class="mt-5">
+      <div class="mt-3">
         <% if @group_comments.any? %>
           <% @group_comments.each do |comment| %>
             <div class="card mb-3">
