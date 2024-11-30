@@ -29,6 +29,16 @@ form .form-control#search-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &.custom-date-active {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .form-select,
+    .form-control {
+    margin-top: 10px;
+    }
+  }
 }
 
 #date-filter {
@@ -54,14 +64,13 @@ form .form-control#search-bar {
 }
 
 #custom-date {
-  width: 100px;
+  width: 120px;
   height: 30px;
   border: 1px solid #ff5733;
   border-radius: 15px;
   font-family: Comfortaa, sans-serif;
   font-size: 12px;
   padding: 10px;
-  border-color: black;
 }
 
 .form-select[name="category"] {
