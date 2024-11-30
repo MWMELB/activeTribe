@@ -5,7 +5,7 @@ class GroupCommentsController < ApplicationController
   def create
     @comment = @group.group_comments.build(comment_params)
     @comment.user = current_user # Associate the comment with the current user
-    authorize @group, :comment?
+    authorize @comment
     if @comment.save
       flash[:notice] = "Comment posted successfully."
       redirect_to group_path(@group)

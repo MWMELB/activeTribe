@@ -5,6 +5,10 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
   overflow: hidden;
+  .subtitle {
+    color: gray;
+    font-size: 12px;
+  }
 }
 
 .card-title {
@@ -21,6 +25,7 @@
 .activity-card-image {
   object-fit: cover;
   object-position: center;
+  height: 415px;
   width: 100%;
 }
 

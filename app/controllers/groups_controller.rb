@@ -2,6 +2,11 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :destroy]
   def index
     @groups = policy_scope(Group)
+    if params[:query].present?
+      @groups = Group.search_by_name_and_description(params[:query])
+    else
+      @groups = policy_scope(Group)
+    end
   end
 
   def show

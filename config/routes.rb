@@ -1,21 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users
   root to: "pages#home"
 
+  # USER PAGES
+  devise_for :users
   get '/:username/activities', to: 'activities#my_activities', as: :my_activities
-  get '/activities', to: 'activities#index', as: :default_activities
-
   get '/:username/groups', to: 'group_users#index', as: :my_groups
-  get '/groups', to: 'group_users#index', as: :default_groups
 
+  # ACTIVITY PAGES
   resources :activities do
     resources :bookings, only: [:index] do
     end
   end
-  # get "my_activities", to: "activities#my_activities"
   post "activities/:id/book", to: "bookings#create", as: :book_activity
 
-
+  # BOOKINGS PAGES
   resources :bookings do
     collection do
       get :booking_requests
@@ -26,6 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
+  # GROUPS/GROUP_USERS PAGES
   resources :groups do
     resources :group_comments, only: [:create, :destroy]
     resources :group_user, only: [:destroy]
