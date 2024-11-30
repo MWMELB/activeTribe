@@ -1,9 +1,9 @@
 module GroupHelper
   def format_member(count)
-    if count == 0
-      "#{count + 1} active member"
+    if count == 1
+      "#{count} active member"
     else
-      "#{count + 1} active members"
+      "#{count} active members"
     end
   end
 end

@@ -25,8 +25,12 @@ class GroupPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def post?
+    user.present? && (record.members.include?(user) || owner?)
+  end
+
   def comment?
-    user.present? && record.members.include?(user)
+    post?
   end
 
   class Scope < ApplicationPolicy::Scope

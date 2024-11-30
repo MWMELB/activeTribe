@@ -1,6 +1,6 @@
 require "test_helper"
 
-class GroupCommentTest < ActiveSupport::TestCase
+class GroupPostTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

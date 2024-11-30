@@ -27,11 +27,17 @@ Rails.application.routes.draw do
 
   # GROUPS/GROUP_USERS PAGES
   resources :groups do
-    resources :group_comments, only: [:create, :destroy]
+    # resources :group_posts, only: [:create, :destroy]
     resources :group_user, only: [:destroy]
+
+    resources :group_posts do
+      resources :group_comments, only: [:create, :destroy]
+    end
   end
   post "groups/:id/join", to: "group_users#create", as: :join_group
   delete "groups/:id/leave", to: "group_users#destroy", as: :leave_group
+
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

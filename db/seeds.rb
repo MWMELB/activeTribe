@@ -3,6 +3,9 @@ require "faker"
 puts "Emptying GROUP_COMMENTS database..."
 GroupComment.destroy_all
 
+puts "Emptying GROUP_POSTS database..."
+GroupPost.destroy_all
+
 puts "Emptying GROUP_USERS database..."
 GroupUser.destroy_all
 
@@ -74,6 +77,7 @@ activities.each_with_index do |activity, index|
       name: "#{Faker::Team.creature} #{activity} club",
       description: "We love #{activity} 🤩 #{Faker::Lorem.paragraph(sentence_count: 5)}"
     )
+    GroupUser.create(user: owner, group: new_group)
     new_group.photo.attach(io: file, filename: "#{activity}-2.jpg", content_type: "image/png")
     new_group.save
     file.close
