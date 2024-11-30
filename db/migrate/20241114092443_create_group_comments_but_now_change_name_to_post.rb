@@ -1,4 +1,4 @@
-class CreateGroupComments < ActiveRecord::Migration[7.1]
+class CreateGroupCommentsButNowChangeNameToPost < ActiveRecord::Migration[7.1]
   def change
     create_table :group_comments do |t|
       t.text :content
