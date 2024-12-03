@@ -18,6 +18,19 @@ class GroupCommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @comment = GroupComment.find(params[:id])
+    # raise
+    authorize @comment
+    if @comment.destroy
+      flash[:notice] = "comment deleted."
+    else
+      flash[:alert] = "Failed to delete comment."
+    end
+
+    redirect_to group_group_post_path(@post)
+  end
+
   private
 
   def set_group
