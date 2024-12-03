@@ -1,0 +1,9 @@
+<%= simple_form_for(input) do |f| %>
+  <div class="form-group">
+    <%= f.input :content, label: false, input_html: { placeholder: "Say something...", rows: rows, class: "form-control" } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit submit_text, class: "btn btn-primary" %>
+  </div>
+<% end %>
