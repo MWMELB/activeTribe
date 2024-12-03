@@ -1,5 +1,27 @@
+.post {
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+
 .post-title {
   text-align: center;
   background-color: $very-light-green;
   border-radius: 8px;
+}
+
+.post-content {
+  font-size: 18px;
+}
+
+.post-comments {
+  text-align: right;
+  color: gray;
+  font-style: italic;
+}
+
+.post-delete {
+  color: gray;
 }

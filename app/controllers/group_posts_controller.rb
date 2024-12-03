@@ -4,7 +4,7 @@ class GroupPostsController < ApplicationController
 
   def show
     @post = GroupPost.find(params[:id])
-    @comment = @post.group_comments.new
+    @comment = GroupComment.new
     authorize @post
   end
 
@@ -23,8 +23,7 @@ class GroupPostsController < ApplicationController
 
   def destroy
     @post = @group.group_posts.find(params[:id])
-    Rails.logger.debug "post ID: #{params[:id]}, Group ID: #{@group.id}"
-    authorize @post, :destroy? # Assuming you have pundit authorization for post actions
+    authorize @post
     if @post.destroy
       flash[:notice] = "post deleted."
     else
