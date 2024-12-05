@@ -1,5 +1,5 @@
 <%= simple_form_for(@activity) do |f| %>
-  <div class="activity-form-box">
+  <div class="activity-form-box ">
     <h4>Event info</h4>
     <%= f.input :title, label: "Title", placeholder: "Enter event title", input_html: { class: "form-input" } %>
 
@@ -43,14 +43,18 @@
 
   <div class="activity-form-box">
     <h4>Date and Location</h4>
-    <%= f.input :start, label: "Start Date and Time", input_html: { id: "start-datepicker", class: "form-input" } %>
+    <%= f.input :start,
+                label: "Start Date and Time",
+                as: :string,
+                input_html: { data: { controller: "datepicker" }, class: "form-input" } %>
+
     <%= f.input :duration, label: "Duration (minutes)", placeholder: "Enter duration", input_html: { class: "form-input" } %>
     <%= f.input :location, placeholder: "Enter location", input_html: { class: "form-input" } %>
   </div>
 
-  <div class="activity-form-box p-8 my-5 mt-2 mx-auto">
+  <div class="activity-form-box p-8 mx-auto">
     <%= f.input :photo, as: :file, label: "Upload a Photo", input_html: { class: "form-file" } %>
   </div>
 
-  <%= f.button :submit, class: "btn-submit" %>
+  <%= f.button :submit, class: "btn-submit mt-2" %>
 <% end %>
