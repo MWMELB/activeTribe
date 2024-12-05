@@ -61,6 +61,7 @@ end
       lat: @activity.latitude,
       lng: @activity.longitude
     }
+    @user_booking = current_user.bookings.find_by(activity: @activity)
     @pending_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Pending)
     @accepted_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Accepted)
     @declined_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Declined)
@@ -76,6 +77,7 @@ end
   def create
     @activity = Activity.new(activity_params)
     @activity.user = current_user
+    @booking = Booking.new(activity: @activity, user: current_user)
     authorize @activity
     if @activity.save
       flash[:notice] = "Activity created successfully!"

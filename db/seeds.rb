@@ -51,7 +51,7 @@ activities.each_with_index do |activity, index|
     # Can change the title/description
     title: "#{activity.capitalize} with #{owner.first_name.capitalize}",
     category: activity,
-    description: "Join us in #{location} for #{activity}",
+    description: "Join us in #{location} for #{activity} #{Faker::Lorem.paragraph(sentence_count: 5)}",
     location: location,
     # Start time this upcoming week
     # Faker timezone is UTC, so evening is equivalent to morning in Melbourne
