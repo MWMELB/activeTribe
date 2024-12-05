@@ -24,12 +24,10 @@ body {
 
 // Form container
 .activity-form-box {
-  margin-top: 5rem;
   background-color: #fff;
   border-radius: $border-radius;
   box-shadow: 0 4px 16px $box-shadow-color;
   padding: $input-padding;
-  margin-bottom: 30px;
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
@@ -43,7 +41,7 @@ body {
 
 // Form header
 .form-header {
-  font-size: $header-font-size;
+  // font-size: $header-font-size;
   font-weight: 700;
   color: $primary-color;
   text-align: center;
@@ -124,7 +122,6 @@ label {
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all $transition-duration ease;
-  margin-bottom: 5rem;
 
   &:hover {
     background: linear-gradient(135deg, darken($primary-color, 10%), darken($primary-color, 20%));
@@ -141,10 +138,6 @@ label {
 @media (max-width: 768px) {
   .activity-form-box {
     padding: 20px;
-  }
-
-  .form-header {
-    font-size: 1.4rem;
   }
 
   .btn-submit {

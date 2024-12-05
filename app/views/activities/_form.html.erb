@@ -1,7 +1,6 @@
 <%= simple_form_for(@activity) do |f| %>
-  <div class="activity-form-box p-8 mt-20 mb-20 mx-auto">
-    <h3 class="form-header">Start Your Own Adventure</h3>
-
+  <div class="activity-form-box">
+    <h4>Event info</h4>
     <%= f.input :title, label: "Title", placeholder: "Enter event title", input_html: { class: "form-input" } %>
 
     <%= f.input :category,
@@ -28,23 +27,24 @@
                 prompt: "Select an activity",
                 input_html: { class: "form-select" } %>
 
+    <%= f.input :level,
+                as: :select,
+                collection: Activity.levels.keys.map { |level| [level.titleize, level] },
+                label: "Activity Level",
+                include_blank: "Select Level",
+                input_html: { class: "form-control" } %>
 
-    <%= f.input :level, label: "Activity Level", placeholder: "Enter activity level", input_html: { class: "form-input" } %>
-
-    <%= f.input :description, placeholder: "Description of the activity", input_html: { class: "form-input" } %>
+    <%= f.input :description, placeholder: "Enter a short description", input_html: { class: "form-input" } %>
 
     <%= f.input :price, input_html: { class: "form-input" } %>
 
     <%= f.input :capacity, step: "10", input_html: { class: "form-input" } %>
   </div>
 
-  <div class="activity-form-box p-8 mx-auto">
-
+  <div class="activity-form-box">
+    <h4>Date and Location</h4>
     <%= f.input :start, label: "Start Date and Time", input_html: { id: "start-datepicker", class: "form-input" } %>
-
-
     <%= f.input :duration, label: "Duration (minutes)", placeholder: "Enter duration", input_html: { class: "form-input" } %>
-
     <%= f.input :location, placeholder: "Enter location", input_html: { class: "form-input" } %>
   </div>
 
