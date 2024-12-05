@@ -49,7 +49,11 @@
                 input_html: { data: { controller: "datepicker" }, class: "form-input" } %>
 
     <%= f.input :duration, label: "Duration (minutes)", placeholder: "Enter duration", input_html: { class: "form-input" } %>
-    <%= f.input :location, placeholder: "Enter location", input_html: { class: "form-input" } %>
+
+    <%= f.input :location,
+                placeholder: "Enter location",
+                input_html: { data: {address_autocomplete_target: "address"}, class: "form-input" },
+                wrapper_html: { data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]} } %>
   </div>
 
   <div class="activity-form-box p-8 mx-auto">

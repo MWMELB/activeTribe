@@ -77,7 +77,8 @@ end
   def create
     @activity = Activity.new(activity_params)
     @activity.user = current_user
-    @booking = Booking.new(activity: @activity, user: current_user)
+    @booking = Booking.create(activity: @activity, user: current_user)
+
     authorize @activity
     if @activity.save
       flash[:notice] = "Activity created successfully!"
