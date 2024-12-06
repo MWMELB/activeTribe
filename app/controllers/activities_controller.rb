@@ -63,9 +63,9 @@ end
     }
     @user_booking = current_user.bookings.find_by(activity: @activity)
     @booking = Booking.new(user: current_user, activity: @activity, status: :Pending)
-    @pending_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Pending)
-    @accepted_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Accepted)
-    @declined_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Declined)
+    @pending_requests = Booking.where(activity: @activity, status: :Pending)
+    @accepted_requests = Booking.where(activity: @activity, status: :Accepted)
+    @declined_requests = Booking.where(activity: @activity, status: :Declined)
 
     authorize Booking, :booking_requests?
   end
