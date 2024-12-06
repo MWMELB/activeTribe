@@ -62,6 +62,7 @@ end
       lng: @activity.longitude
     }
     @user_booking = current_user.bookings.find_by(activity: @activity)
+    @booking = Booking.new(user: current_user, activity: @activity, status: :Pending)
     @pending_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Pending)
     @accepted_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Accepted)
     @declined_requests = Booking.joins(:activity).where(activities: { user: current_user }).where(status: :Declined)

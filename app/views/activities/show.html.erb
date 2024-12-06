@@ -24,7 +24,11 @@
     <% if (@user_booking && current_user != @activity.user) %>
       <%= link_to "See my booking", bookings_path, class: "btn btn-info" %>
     <% elsif current_user != @activity.user %>
-      <%= button_to "Book Now", book_activity_path(@activity), method: :post, class: "btn btn-secondary d-block rounded-button" %>
+      <% if policy(@booking).create?%>
+        <%= button_to "Book Now", book_activity_path(@activity), method: :post, class: "btn btn-secondary d-block rounded-button" %>
+      <% else %>
+        <button class="btn btn-secondary" disabled>Fully Booked</button>
+        <% end %>
     <% end %>
   </div>
 </div>
@@ -74,8 +78,9 @@
   </div>
 
   <% unless current_user.bookings.exists?(activity: @activity) %>
-    <div class="d-flex justify-content-center mt-4">
-      <%= button_to "Book Now", book_activity_path(@activity), method: :post, class: "btn btn-secondary d-block rounded-button" %>
+    <div class="text-end mt-4">
+      <div class="d-flex justify-content-end"><%= button_to "Book Now", book_activity_path(@activity), method: :post, class: "btn btn-secondary d-block rounded-button" %></div>
+      <p class="fw-light mb-0" style="color:grey; font-size:0.8rem"><%= @activity.capacity - @activity.bookings.count %> spots left!</p>
     </div>
   <% end %>
 
