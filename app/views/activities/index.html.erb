@@ -71,7 +71,7 @@
         <% @activities.each do |activity| %>
           <div class="card shadow-sm activity-card mb-3">
             <div class="card-body">
-              <h2 class="card-title"><%= link_to activity.title, activity_path(activity) %></h2>
+              <h2 class="card-title"><%= link_to activity.title.titleize, activity_path(activity) %></h2>
               <ul class="list-unstyled">
                 <li><strong>Location:</strong> <%= activity.location %></li>
                 <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>

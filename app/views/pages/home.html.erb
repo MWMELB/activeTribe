@@ -20,7 +20,7 @@
             <% end %>
 
             <div class="card-body">
-              <h4 class="card-title"><%= activity.title %></h4>
+              <h4 class="card-title"><%= activity.title.titleize.titleize %></h4>
               <p class="card-text mb-1">
                 <span class="date"><%= activity.start.strftime("%d %b") %> <br> </span>
                 <span class="location"><%= activity.location %></span>
@@ -62,7 +62,7 @@ function initializeMap(longitude, latitude) {
       .addTo(map);
 
     var popupContent = "<div class='popup-content'>" +
-                   "<b class='popup-title'>" + "<%= activity.title %>" + "</b>" +
+                   "<b class='popup-title'>" + "<%= activity.title.titleize %>" + "</b>" +
                    "<br><span class='popup-location'>" + "<%= activity.location %>" + "</span>" +
                    "<br><span class='popup-date'>" + "<%= activity.start.strftime('%d %b %Y') %>" + "</span>" +
                    "<br><a href='<%= activity_path(activity) %>' class='btn-view-details'> Join Now </a>" +

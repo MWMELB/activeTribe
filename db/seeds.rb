@@ -50,7 +50,7 @@ activities.each_with_index do |activity, index|
     user: owner,
     # Can change the title/description
     title: "#{activity.capitalize} with #{owner.first_name.capitalize}",
-    category: activity,
+    category: activity.capitalize,
     description: "Join us in #{location} for #{activity} #{Faker::Lorem.paragraph(sentence_count: 5)}",
     location: location,
     # Start time this upcoming week

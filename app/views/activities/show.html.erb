@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-between">
       <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left back-icon"></i>'.html_safe, :back %></div>
       <div class="d-flex">
-        <h3 class="px-2"><%= @activity.title.capitalize %></h3>
+        <h3 class="px-2"><%= @activity.title.titleize.titleize %></h3>
         <% if policy(@activity).owner? %>
           <i data-action="click->toggle#fire" class="fa-solid fa-caret-down pt-1"></i>
         <% end %>
@@ -35,7 +35,7 @@
   <% else %>
     <p class="text-center text-muted">No photo available</p>
   <% end %>
-  <h1 class="activity-title-overlay"><%= @activity.title %></h1>
+  <h1 class="activity-title-overlay"><%= @activity.title.titleize %></h1>
 </div>
 
 <div class="container px-4 pb-4 mb-5">
@@ -118,6 +118,6 @@
 
   new mapboxgl.Marker()
     .setLngLat([longitude, latitude])
-    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<b><%= @activity.title %></b><br><%= @activity.location %>"))
+    .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML("<b><%= @activity.title.titleize %></b><br><%= @activity.location %>"))
     .addTo(map);
 </script>
