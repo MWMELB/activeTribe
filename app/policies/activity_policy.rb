@@ -30,7 +30,7 @@ class ActivityPolicy < ApplicationPolicy
   end
 
   def destroy?
-    owner
+    owner?
   end
 
   def my_activities?

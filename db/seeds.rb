@@ -50,8 +50,8 @@ activities.each_with_index do |activity, index|
     user: owner,
     # Can change the title/description
     title: "#{activity.capitalize} with #{owner.first_name.capitalize}",
-    category: activity,
-    description: "Join us in #{location} for #{activity}",
+    category: activity.capitalize,
+    description: "Join us in #{location} for #{activity} #{Faker::Lorem.paragraph(sentence_count: 5)}",
     location: location,
     # Start time this upcoming week
     # Faker timezone is UTC, so evening is equivalent to morning in Melbourne
@@ -64,6 +64,7 @@ activities.each_with_index do |activity, index|
     capacity: activity_capacity.sample,
     level: rand(0..2)
   )
+  Booking.create(user: owner, activity: new_activity, status: :Accepted)
   new_activity.photo.attach(io: file, filename: "#{activity}.jpg", content_type: "image/png")
   new_activity.save
   file.close

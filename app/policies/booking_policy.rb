@@ -10,7 +10,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def create?
-    record.activity.user != user
+    record.activity.user != user && record.activity.bookings.count < record.activity.capacity
   end
 
   def destroy?
