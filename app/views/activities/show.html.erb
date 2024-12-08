@@ -20,7 +20,7 @@
         <% end %>
       </div>
 
-      <h3>Booking requests</h3>
+      <h5>Requests</h5>
       <ul class="nav nav-tabs nav-fill" id="bookingRequestsTab" role="tablist">
         <li class="nav-item" role="presentation">
           <button class="nav-link active" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="true">Pending</button>
@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-
+  </div>
   <div class="mt-1 booking-btns d-flex flex-row-reverse">
     <% if (@user_booking && current_user != @activity.user) %>
       <%= link_to "See my booking", bookings_path, class: "btn btn-info" %>
