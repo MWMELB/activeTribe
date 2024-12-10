@@ -33,6 +33,11 @@
             <%= f.date_field :birth_date, class: "form-control form-input", placeholder: "Birth Date" %>
           </div>
 
+          <!-- Profile pic Input -->
+          <div class="mb-4">
+            <%= f.file_field :photo, class: "form-control form-input", label: "Upload a profile picture" %>
+          </div>
+
           <!-- Email Input -->
           <div class="mb-4">
             <%= f.email_field :email, autofocus: true, class: "form-control form-input", placeholder: "email@example.com" %>

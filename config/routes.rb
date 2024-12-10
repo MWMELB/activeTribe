@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
   get '/:username/activities', to: 'activities#my_activities', as: :my_activities
   get '/:username/groups', to: 'group_users#index', as: :my_groups
-  get '/:username/profile', to: 'users#show'
+  get '/:username/profile', to: 'users#show', as: :user_profile
 
   # ACTIVITY PAGES
   resources :activities do
