@@ -1,87 +1,96 @@
-<div class="container my-5 px-4 pb-4">
-  <div class="row justify-content-center">
-    <div class="col">
-      <form method="get" action="<%= activities_path %>" class="mb-4">
-        <div class="row">
-          <!-- Search keyword -->
-          <div class="col-md-4">
-            <input type="text" class="form-control" id="search-bar" name="search" placeholder="Search by keywords..." aria-label="Search activities" value="<%= params[:search] %>">
-          </div>
-
-          <!-- Date filter dropdown -->
-          <div class="filter-container">
-          <div class="col-md-3">
-            <select class="form-select" id="date-filter" name="date">
-              <option value="">Date</option>
-              <option value="<%= Date.today %>" <%= 'selected' if params[:date] == Date.today.to_s %>>Today</option>
-              <option value="<%= Date.tomorrow %>" <%= 'selected' if params[:date] == Date.tomorrow.to_s %>>Tomorrow</option>
-              <option value="select-date">Select Different Date</option>
-            </select>
-          </div>
-          <!-- Calendar date picker (hidden by default) -->
-          <div class="col-md-3" id="custom-date-picker" style="display: none;">
-            <input type="date" class="form-control" id="custom-date" name="custom_date" value="<%= params[:custom_date] %>">
-          </div>
-          <!-- Filter by category -->
-          <div class="col-md-2">
-            <select class="form-select" name="category">
-              <option value="">Category</option>
-              <option value="basketball" <%= 'selected' if params[:category] == 'basketball' %>>Basketball</option>
-              <option value="tennis" <%= 'selected' if params[:category] == 'tennis' %>>Tennis</option>
-              <option value="hike" <%= 'selected' if params[:category] == 'hike' %>>Hike</option>
-              <option value="running" <%= 'selected' if params[:category] == 'running' %>>Running</option>
-              <option value="pickleball" <%= 'selected' if params[:category] == 'pickleball' %>>Pickleball</option>
-              <option value="surfing" <%= 'selected' if params[:category] == 'surfing' %>>Surfing</option>
-              <option value="yoga" <%= 'selected' if params[:category] == 'yoga' %>>Yoga</option>
-              <option value="other" <%= 'selected' if params[:category] == 'other' %>>Other</option>
-            </select>
-          </div>
-          <!-- Filter by price -->
-          <div class="col-md-2">
-            <select class="form-select" name="price">
-              <option value="">Price</option>
-              <option value="free" <%= 'selected' if params[:price] == 'free' %>>Free</option>
-              <option value="paid" <%= 'selected' if params[:price] == 'paid' %>>Paid</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group d-flex align-items-center">
-          <!-- Location input -->
-          <input type="text" class="form-control flex-grow-1 mr-2" name="location" placeholder="Search by location" aria-label="Search by location" value="<%= params[:location] %>">
-          <!-- Sort by options -->
-          <select class="form-select flex-shrink-0" name="sort_by">
-            <option value="">Sort by...</option>
-            <option value="start" <%= 'selected' if params[:sort_by] == 'start' %>>Date</option>
-            <option value="location" <%= 'selected' if params[:sort_by] == 'location' %>>Location</option>
-          </select>
-        </div>
-
-          <!-- Submit button -->
-          <div class="col-md-2">
-            <button class="btn btn-dark w-100" type="submit">
-              <i class="fas fa-search"></i> Search
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <h1 class="text-center mb-3">All Available Activities</h1>
+<div class="search-activity-container">
+  <div class="container my-5 px-4 pb-4">
+    <div class="row d-flex justify-content-center align-items-center">
       <div>
-        <% @activities.each do |activity| %>
-          <div class="card shadow-sm activity-card mb-3">
-            <div class="card-body">
-              <h2 class="card-title"><%= link_to activity.title.titleize, activity_path(activity) %></h2>
-              <ul class="list-unstyled">
-                <li><strong>Location:</strong> <%= activity.location %></li>
-                <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
-                <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
-                <li><strong>Price:</strong> <%= format_price(activity.price) %></li>
-              </ul>
-              <%= link_to "View Details", activity_path(activity), class: "btn btn-dark w-100" %>
+        <h1>Explore</h1>
+        <form method="get" action="<%= activities_path %>" class="mb-4">
+          <div>
+            <!-- Search keyword -->
+            <div class="col-md-12 col-sm-12">
+              <input type="text" class="form-control" id="search-bar" name="search" placeholder="Search by keywords..." aria-label="Search activities" value="<%= params[:search] %>">
+            </div>
+
+            <!-- Date filter dropdown -->
+          <div class="d-flex flex-row d-flex justify-content-between">
+            <div class = "col-lg-4 col-sm-4">
+              <select class="form-select-activity" id="date-filter" name="date">
+                <option value="">Date</option>
+                <option value="<%= Date.today %>" <%= 'selected' if params[:date] == Date.today.to_s %>>Today</option>
+                <option value="<%= Date.tomorrow %>" <%= 'selected' if params[:date] == Date.tomorrow.to_s %>>Tomorrow</option>
+                <option value="select-date">Select a Date</option>
+              </select>
+            </div>
+
+            <!-- Filter by category -->
+            <div class="col-lg-4 col-sm-4">
+              <select class="form-select-activity" name="category">
+                <option value="">Activity Category</option>
+                <option value="basketball" <%= 'selected' if params[:category] == 'basketball' %>>Basketball</option>
+                <option value="tennis" <%= 'selected' if params[:category] == 'tennis' %>>Tennis</option>
+                <option value="hike" <%= 'selected' if params[:category] == 'hike' %>>Hike</option>
+                <option value="running" <%= 'selected' if params[:category] == 'running' %>>Running</option>
+                <option value="pickleball" <%= 'selected' if params[:category] == 'pickleball' %>>Pickleball</option>
+                <option value="surfing" <%= 'selected' if params[:category] == 'surfing' %>>Surfing</option>
+                <option value="yoga" <%= 'selected' if params[:category] == 'yoga' %>>Yoga</option>
+                <option value="other" <%= 'selected' if params[:category] == 'other' %>>Other</option>
+              </select>
+            </div>
+
+            <!-- Filter by price -->
+            <div class = "col-lg-4 col-sm-4">
+              <select class="form-select-activity" name="price">
+                <option value="">Price</option>
+                <option value="free" <%= 'selected' if params[:price] == 'free' %>>Free</option>
+                <option value="paid" <%= 'selected' if params[:price] == 'paid' %>>Paid</option>
+              </select>
             </div>
           </div>
-        <% end %>
+        </div>
+
+          <div class="row g-1 mt-2">
+            <div class="d-flex flex-row">
+            <!-- Location input -->
+            <div class="col-9">
+              <input type="text" class="form-control" name="location" placeholder="Search by location" aria-label="Search by location" value="<%= params[:location] %>">
+            </div>
+
+            <!-- Sort by options -->
+            <div class="col-3">
+              <select class="sort_activity" name="sort_by">
+                <option value="">Sort by</option>
+                <option value="start" <%= 'selected' if params[:sort_by] == 'start' %>>Date</option>
+                <option value="location" <%= 'selected' if params[:sort_by] == 'location' %>>Location</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+          <div class="row g-1 mt-3">
+            <!-- Submit button -->
+            <div class="col-md-6 col-sm-4 offset-md-3 offset-sm-4">
+              <button class="btn btn-dark w-100" type="submit">
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div>
+          <% @activities.each do |activity| %>
+            <div class="card shadow-sm activity-card mb-3">
+              <div class="card-body">
+                <h2 class="card-title"><%= link_to activity.title, activity_path(activity) %></h2>
+                <ul class="list-unstyled">
+                  <li><strong>Location:</strong> <%= activity.location %></li>
+                  <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
+                  <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
+                  <li><strong>Price:</strong> <%= format_price(activity.price) %></li>
+                </ul>
+                <%= link_to "View Details", activity_path(activity), class: "btn btn-dark w-100" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -107,7 +116,6 @@
         filterContainer.classList.remove('custom-date-active');
       }
     });
-
 
     if (customDate.value !== '') {
       customDatePicker.style.display = 'block';
