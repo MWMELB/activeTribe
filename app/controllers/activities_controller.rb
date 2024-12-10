@@ -67,6 +67,8 @@ end
     @accepted_requests = Booking.where(activity: @activity, status: :Accepted)
     @declined_requests = Booking.where(activity: @activity, status: :Declined)
 
+    @activity_posts = @activity.activity_posts.includes(:user)
+    @post = ActivityPost.new
     authorize Booking, :booking_requests?
   end
 

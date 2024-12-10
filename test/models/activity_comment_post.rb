@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ActivityCommentTest < ActiveSupport::TestCase
+class ActivitypostTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

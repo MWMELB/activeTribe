@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :activities do
     resources :bookings, only: [:index] do
     end
+
+    resources :activity_posts do
+      resources :activity_comments, only: [:create, :destroy]
+    end
   end
   post "activities/:id/book", to: "bookings#create", as: :book_activity
 
