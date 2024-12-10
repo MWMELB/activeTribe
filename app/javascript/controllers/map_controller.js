@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import mapboxgl from 'mapbox-gl' // Don't forget this!
+import mapboxgl from 'mapbox-gl'
 
 export default class extends Controller {
   static values = {
@@ -18,10 +18,10 @@ export default class extends Controller {
   }
 
   #addMarkerToMap() {
-    // this.markerValue.forEach((marker) => {
+
     this.markerValue = new mapboxgl.Marker()
         .setLngLat( [ lng, lat ])
         .addTo(this.map)
-    // })
+
   }
 }
