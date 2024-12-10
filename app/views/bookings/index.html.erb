@@ -8,7 +8,11 @@
             <h5 class="card-title"><%= link_to booking.activity.title.titleize, activity_path(booking.activity) %></h5>
             <div><strong>Date:</strong> <%= booking.activity.start.strftime("%A, %d %b %Y %l:%M %p") %></div>
             <div><strong>Location:</strong> <%= booking.activity.location %></div>
-            <div><strong>Status:</strong> <%= booking.status.capitalize %></div>
+            <% if booking.activity.user == current_user %>
+              <div style="color:gray">Organised by yourself</div>
+            <% else %>
+              <div><strong>Status:</strong> <%= booking.status.capitalize %></div>
+            <% end %>
           </div>
           <div id="cancel-booking">
             <% if booking.status == "Pending" %>

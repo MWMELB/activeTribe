@@ -6,7 +6,11 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title hover"><%= link_to group_user.group.name.titleize, group_path(group_user.group) %></h2>
-          Member since <%= group_user.created_at.strftime("%b %Y") %>
+          <% if group_user.group.user == current_user %>
+            Founded in <%= group_user.created_at.strftime("%b %Y") %>
+          <% else %>
+            Member since <%= group_user.created_at.strftime("%b %Y") %>
+          <% end %>
         </div>
       </div>
       <% end %>
