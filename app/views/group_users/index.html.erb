@@ -1,16 +1,18 @@
 <div class="container my-5 px-4 pb-4">
   <div class="row">
     <div class="col">
-      <h1>My Groups</h1>
-      <%= link_to "Explore more groups", groups_path %>
+      <h1 class="text-center mb-4">My Groups</h1>
       <% @group_users.each do |group_user| %>
       <div class="card">
         <div class="card-body">
-          <h2><%= link_to group_user.group.name.titleize, group_path(group_user.group)%></h2>
-          <p>Member since <%= group_user.created_at.strftime("%b %Y") %></p>
+          <h2 class="card-title hover"><%= link_to group_user.group.name.titleize, group_path(group_user.group) %></h2>
+          Member since <%= group_user.created_at.strftime("%b %Y") %>
         </div>
       </div>
       <% end %>
+      <div class="text-center hover">
+        <%= link_to "Explore more groups", groups_path, id:"explore"%>
+      </div>
     </div>
   </div>
 </div>

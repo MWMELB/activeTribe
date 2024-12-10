@@ -30,11 +30,16 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-// h2 {
-//   font-size: 1.8rem;
-//   font-weight: bold;
-//   color: #343a40;
-// }
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+
+  &:hover {
+    color: rgba(0, 89, 1, 0.925);
+    // text-shadow: 0 0 2px rgba(81, 81, 81, 0.374);
+    transition: 0.5s;
+  }
+}
 
 .form-input {
   border: 1px solid #ddd;

@@ -30,7 +30,10 @@
                 as: :string,
                 input_html: { data: { controller: "datepicker" }, class: "form-input" } %>
 
-    <%= f.input :duration, label: "Duration (minutes)", placeholder: "Enter duration", input_html: { class: "form-input" } %>
+    <%= f.input :duration,
+                label: "Duration (minutes)",
+                placeholder: "Enter duration",
+                input_html: { class: "form-input" } %>
 
     <%= f.input :location,
                 placeholder: "Enter location",
@@ -38,7 +41,10 @@
   </div>
 
   <div class="activity-form-box p-8 mx-auto">
-    <%= f.input :photo, as: :file, label: "Upload a Photo", input_html: { class: "form-file" } %>
+    <%= f.input :photo,
+                as: :file,
+                label: "Upload a Photo",
+                input_html: { class: "form-file" } %>
   </div>
 
   <%= f.button :submit, class: "btn-submit mt-2" %>

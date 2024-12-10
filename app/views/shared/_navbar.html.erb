@@ -8,7 +8,7 @@
       <% if user_signed_in? %>
         <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%# <%= cl_image_tag current_user.photo.key, class: "avatar", alt: "dropdown menu" %> %>
+            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
           </a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <%= link_to "View my profile", user_profile_path(current_user.username), class: "dropdown-item" %>
@@ -16,7 +16,6 @@
             <% if current_user&.username.present? %>
               <%= link_to "My groups", my_groups_path(current_user.username), class: "dropdown-item" %>
               <%= link_to "My activities", my_activities_path(current_user.username), class: "dropdown-item" %>
-
             <% else %>
               <%= link_to "My groups", groups_path, class: "dropdown-item" %>
               <%= link_to "My activities", activities_path, class: "dropdown-item" %>
