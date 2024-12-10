@@ -1,30 +1,40 @@
 <div class="container my-5 px-4 pb-4">
   <div class="row justify-content-center">
     <div class="col">
-      <h1 class="text-center mb-3">My Activities</h1>
-      <div>
-        <% @activities.each do |activity| %>
-            <!-- Activity Card -->
-            <div class="card shadow-sm activity-card mb-3">
-              <!-- Activity Title -->
-              <div class="card-body">
-                <h2 class="card-title"><%= link_to activity.title.titleize, activity_path(activity)%></h2>
-                <ul class="list-unstyled">
-                  <li><strong>Location:</strong> <%= activity.location %></li>
-                  <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
-                  <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
-                  <li><strong>Price:</strong> <%= format_price(activity.price) %></li>
-                </ul>
-
-                <!-- Buttons -->
-                <%# <%= link_to "View Details", activity_path(activity), class: "btn btn-dark w-100" %>
-                <%= link_to "Edit", edit_activity_path(activity) %>
-                <%= link_to "Delete", activity, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this activity?" } %>
-
-              </div>
-            </div>
-        <% end %>
+      <div class="d-flex justify-content-between">
+        <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left back-icon"></i>'.html_safe, :back %></div>
+        <h1 class="text-center mb-4">My Activities</h1>
       </div>
+      <% if @activities.any? %>
+        <div>
+          <% @activities.each do |activity| %>
+              <!-- Activity Card -->
+              <div class="card shadow-sm activity-card mb-3">
+                <!-- Activity Title -->
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h2 class="card-title"><%= link_to activity.title.titleize, activity_path(activity)%></h2>
+                    <div>
+                      <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_activity_path(activity), class: "btn-icon me-3" %>
+                      <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, activity, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this activity?" }, class: "btn-icon" %>
+                    </div>
+                  </div>
+                  <ul class="list-unstyled">
+                    <li><strong>Location:</strong> <%= activity.location %></li>
+                    <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
+                    <li><strong>Duration:</strong> <%= format_duration(activity.duration) %></li>
+                    <li><strong>Price:</strong> <%= format_price(activity.price) %></li>
+                  </ul>
+                </div>
+              </div>
+          <% end %>
+        </div>
+      <% else %>
+      <div class="text-center">
+        <p>No activities yet.</p>
+        <%= link_to "Start your own adventure", new_activity_path, class:"fs-5" %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

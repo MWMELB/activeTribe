@@ -37,7 +37,7 @@ end
 puts "Creating 5 activities..."
 users = User.all
 melb_locations = ["Carlton, Victoria", "Southbank, Victoria", "Melbourne, Victoria", "Docklands, Victoria", "Fitzroy, Victoria"]
-activity_capacity = [10, 20, 30, 50, 100]
+activity_capacity = [10, 15, 20, 30]
 activities = ["pilates", "running", "pickleball", "surfing", "basketball", "hiking"]
 
 activities.each_with_index do |activity, index|

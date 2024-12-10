@@ -1,14 +1,21 @@
 <div class="container my-5 px-4 pb-4">
-  <h2 class="text-center mb-5">My Bookings</h2>
+  <div class="d-flex justify-content-between">
+        <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left back-icon"></i>'.html_safe, :back %></div>
+        <h1 class="text-center mb-4">My Bookings</h1>
+      </div>
   <% if @bookings.any? %>
     <% @bookings.each do |booking| %>
       <div class="card mb-4">
         <div class="card-body d-flex justify-content-between">
           <div>
             <h5 class="card-title"><%= link_to booking.activity.title.titleize, activity_path(booking.activity) %></h5>
-            <p><strong>Date:</strong> <%= booking.activity.start.strftime("%A, %d %b %Y %l:%M %p") %></p>
-            <p><strong>Location:</strong> <%= booking.activity.location %></p>
-            <p><strong>Status:</strong> <%= booking.status.capitalize %></p>
+            <div><strong>Date:</strong> <%= booking.activity.start.strftime("%A, %d %b %Y %l:%M %p") %></div>
+            <div><strong>Location:</strong> <%= booking.activity.location %></div>
+            <% if booking.activity.user == current_user %>
+              <div style="color:gray">Organised by yourself</div>
+            <% else %>
+              <div><strong>Status:</strong> <%= booking.status.capitalize %></div>
+            <% end %>
           </div>
           <div id="cancel-booking">
             <% if booking.status == "Pending" %>

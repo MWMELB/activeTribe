@@ -1,16 +1,25 @@
 <div class="container my-5 px-4 pb-4">
   <div class="row">
     <div class="col">
-      <h1>My Groups</h1>
-      <%= link_to "Explore more groups", groups_path %>
+      <div class="d-flex justify-content-between">
+        <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left back-icon"></i>'.html_safe, :back %></div>
+        <h1 class="mb-4">My Groups</h1>
+      </div>
       <% @group_users.each do |group_user| %>
       <div class="card">
         <div class="card-body">
-          <h2><%= link_to group_user.group.name.titleize, group_path(group_user.group)%></h2>
-          <p>Member since <%= group_user.created_at.strftime("%b %Y") %></p>
+          <h2 class="card-title hover"><%= link_to group_user.group.name.titleize, group_path(group_user.group) %></h2>
+          <% if group_user.group.user == current_user %>
+            Founded in <%= group_user.created_at.strftime("%b %Y") %>
+          <% else %>
+            Member since <%= group_user.created_at.strftime("%b %Y") %>
+          <% end %>
         </div>
       </div>
       <% end %>
+      <div class="text-center hover">
+        <%= link_to "Explore more groups", groups_path, id:"explore"%>
+      </div>
     </div>
   </div>
 </div>

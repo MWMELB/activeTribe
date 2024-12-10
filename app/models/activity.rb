@@ -1,7 +1,7 @@
 class Activity < ApplicationRecord
   belongs_to :user
   has_many :bookings, dependent: :destroy
-  has_many :activity_comments, dependent: :destroy
+  has_many :activity_posts, dependent: :destroy
   has_many :bookers, through: :bookings, source: :user
   has_one_attached :photo
   validates :title, :category, :description, :location, :start, :duration, :price, :capacity, :level, presence: true

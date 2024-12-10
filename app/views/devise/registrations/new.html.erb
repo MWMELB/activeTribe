@@ -2,61 +2,53 @@
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
       <div class="signup-form p-4 shadow-sm rounded">
-        <h2 class="text-center mb-5">Enter your details to join us.</h2>
+        <h2 class="text-center mb-5">Join Us!</h2>
 
-        <!-- Display Errors Above Form Fields -->
-        <% if resource.errors.any? %>
-          <div class="alert alert-danger" role="alert" style="padding: 0.5rem 1rem; margin-bottom: 1.5rem;">
-            <small>
-            <ul class="mb-0" style="margin-bottom: 1rem;">
-              <% resource.errors.full_messages.uniq.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-            </small>
-          </div>
-        <% end %>
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= f.error_notification %>
 
-        <%= form_with model: resource, url: registration_path(resource_name), local: true do |f| %>
-          <!-- First Name Input -->
-          <div class="mb-4">
-            <%= f.text_field :first_name, class: "form-control form-input", placeholder: "First Name" %>
-          </div>
+          <div class="form-inputs">
+            <%= f.input :first_name,
+                        placeholder: "First Name",
+                        input_html: { class: "form-input" } %>
 
-          <!-- Last Name Input -->
-          <div class="mb-4">
-            <%= f.text_field :last_name, class: "form-control form-input", placeholder: "Last Name" %>
-          </div>
+            <%= f.input :last_name,
+                        placeholder: "Last Name",
+                        input_html: { class: "form-input" } %>
 
-          <!-- Birth Date Input -->
-          <div class="mb-4">
-            <%= f.date_field :birth_date, class: "form-control form-input", placeholder: "Birth Date" %>
-          </div>
+            <%= f.input :birth_date,
+                        start_year: 1900,
+                        end_year: Time.current.year,
+                        placeholder: "Birth Date",
+                        input_html: { class: "form-input" } %>
 
-          <!-- Email Input -->
-          <div class="mb-4">
-            <%= f.email_field :email, autofocus: true, class: "form-control form-input", placeholder: "email@example.com" %>
-          </div>
+            <%= f.input :photo,
+                        as: :file,
+                        label: "Upload a profile picture",
+                        input_html: { class: "form-file" } %>
 
-          <!-- Password Input -->
-          <div class="mb-4">
-            <%= f.password_field :password, class: "form-control form-input", placeholder: "Password", autocomplete: "new-password" %>
-          </div>
+            <%= f.input :email,
+                        autofocus: true,
+                        placeholder: "email@example.com",
+                        input_html: { class: "form-input" } %>
 
-          <!-- Password Confirmation Input -->
-          <div class="mb-4">
-            <%= f.password_field :password_confirmation, class: "form-control form-input", placeholder: "Confirm Password", autocomplete: "new-password" %>
-          </div>
+            <%= f.input :password,
+                        required: true,
+                        placeholder: "Password",
+                        input_html: { class: "form-input" } %>
 
-          <!-- Agreement Checkbox -->
-          <div class="form-check mb-4">
-            <%= f.check_box :terms, { class: "form-check-input" }, '1', '0' %>
-            <%= f.label :terms, "I agree to activeTribe's Privacy Policy and Terms of Use", class: "form-check-label" %>
+            <%= f.input :password_confirmation,
+                        required: true,
+                        placeholder: "Confirm Password",
+                        input_html: { class: "form-input" } %>
+
+            <%= f.input :terms,
+                        as: :boolean,
+                        label: "I agree to activeTribe's Privacy Policy and Terms of Use" %>
           </div>
 
-          <!-- Continue Button -->
-          <div class="text-center">
-            <%= f.submit "Continue", class: "btn btn-dark btn-lg w-100" %>
+          <div class="form-actions">
+            <%= f.button :submit, "Sign up", class:"btn btn-primary" %>
           </div>
         <% end %>
 
