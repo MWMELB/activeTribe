@@ -3,9 +3,9 @@
     <div class="col">
       <h1>Create a new group</h1>
       <%= simple_form_for (@group) do |f| %>
-        <%= f.input :name %>
-        <%= f.input :description %>
-        <%= f.input :photo, as: :file, label: "Upload a Photo" %>
+        <%= f.input :name, input_html: { class: "form-input" } %>
+        <%= f.input :description, input_html: { class: "form-input" }%>
+        <%= f.input :photo, as: :file, label: "Upload a Photo", input_html: { class: "form-file" } %>
         <%= f.button :submit, class: "btn btn-dark w-100 mb-5" %>
       <% end %>
     </div>
