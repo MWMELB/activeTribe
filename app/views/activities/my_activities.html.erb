@@ -12,13 +12,22 @@
               <div class="card shadow-sm activity-card mb-3">
                 <!-- Activity Title -->
                 <div class="card-body">
-                  <div class="d-flex justify-content-between">
-                    <h2 class="card-title"><%= link_to activity.title.titleize, activity_path(activity)%></h2>
-                    <div>
-                      <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_activity_path(activity), class: "btn-icon me-3" %>
-                      <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, activity, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this activity?" }, class: "btn-icon" %>
+                  <div data-controller="toggle">
+                    <div class="d-flex justify-content-between">
+                      <h4 class="card-title"><%= link_to activity.title.titleize, activity_path(activity)%></h4>
+                      <i data-action="click->toggle#fire" class="fa-solid fa-caret-down pt-1"></i>
+                    </div>
+
+                    <div class="group-btns d-flex justify-content-end d-none" data-toggle-target="togglableElement">
+                      <% if policy(activity).owner? %>
+                        <div class="d-flex">
+                          <%= link_to '<i class="fa-solid fa-pen"></i>'.html_safe, edit_activity_path(activity), class: "btn-icon me-3" %>
+                          <%= link_to '<i class="fa-regular fa-trash-can"></i>'.html_safe, activity, data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this activity?" }, class: "btn-icon" %>
+                        </div>
+                      <% end %>
                     </div>
                   </div>
+
                   <ul class="list-unstyled">
                     <li><strong>Location:</strong> <%= activity.location %></li>
                     <li><strong>Date:</strong> <%= activity.start.strftime("%A, %d %b %Y %l:%M %p") %></li>
