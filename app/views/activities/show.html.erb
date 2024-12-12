@@ -93,7 +93,7 @@
   </div>
 </div>
 
-<div class="activity-photo-container my-3">
+<div class="activity-photo-container my-3" style="position: relative;">
   <% if @activity.photo.attached? %>
     <%= image_tag @activity.photo, class: "activity-card-image" %>
   <% else %>
