@@ -1,19 +1,19 @@
-// Variables for colors, spacing, and typography
-$primary-color: #7DF600; // Primary color (blue)
-$secondary-color: #6c757d; // Secondary text color (gray)
-$background-color: #f9f9f9; // Light background color for form
-$input-background: #f3f6fb; // Light blue background for inputs
-$input-focus-background: #fff; // White background when input is focused
-$box-shadow-color: rgba(0, 0, 0, 0.1); // Soft shadow color for depth
-$border-radius: 12px; // Rounded corners for form elements
+
+$primary-color: #7DF600;
+$secondary-color: #6c757d;
+$background-color: #f9f9f9;
+$input-background: #f3f6fb;
+$input-focus-background: #fff;
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+$border-radius: 12px;
 $input-padding: 16px;
 $input-font-size: 16px;
 $button-padding: 14px 30px;
 $transition-duration: 0.3s;
-$header-font-size: 1.6rem; // Header font size
-$label-font-size: 14px; // Label font size
+$header-font-size: 1.6rem;
+$label-font-size: 14px;
 
-// General Styles
+
 body {
   font-family: 'Helvetica Neue', sans-serif;
   background-color: $background-color;
@@ -22,7 +22,7 @@ body {
   line-height: 1.6;
 }
 
-// Form container
+
 .activity-form-box {
   background-color: #fff;
   border-radius: $border-radius;
@@ -36,11 +36,11 @@ body {
   border: none;
 
   &:hover {
-    box-shadow: 0 10px 20px rgba(164, 163, 163, 0.15); // Deeper shadow on hover
+    box-shadow: 0 10px 20px rgba(164, 163, 163, 0.15);
   }
 }
 
-// Form header
+
 .form-header {
   // font-size: $header-font-size;
   font-weight: 700;
@@ -52,7 +52,7 @@ body {
   text-transform: uppercase;
 }
 
-// Input Fields
+
 .form-input,
 .form-select,
 .form-file {
@@ -66,7 +66,7 @@ body {
   transition: all $transition-duration ease;
   box-sizing: border-box;
 
-  // Focus state styling
+
   &:focus {
     background-color: $input-focus-background;
     border-color: $primary-color;
@@ -74,11 +74,11 @@ body {
     outline: none;
   }
 
-  // Input text color for better readability
+
   color: #333;
 }
 
-// File input (Custom Styling)
+
 .form-file {
   display: block;
   padding: 14px;
@@ -99,7 +99,7 @@ body {
   }
 }
 
-// Label Styles
+
 label {
   font-size: $label-font-size;
   font-weight: 500;
@@ -108,7 +108,7 @@ label {
   display: block;
 }
 
-// Submit Button Styling
+
 .btn-submit {
   display: inline-block;
   background-color: $primary-color;
@@ -135,7 +135,7 @@ label {
   }
 }
 
-// Form layout responsiveness
+
 @media (max-width: 768px) {
   .activity-form-box {
     padding: 20px;
@@ -152,7 +152,7 @@ label {
 //   margin-top: 30px;
 // }
 
-// Add subtle animations to inputs when focused
+
 .form-input,
 .form-select {
   &::placeholder {
