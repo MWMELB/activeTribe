@@ -1,13 +1,21 @@
 <div class="search-activity-container">
+
+<div class="video-background">
+    <video autoplay muted loop id="background-video">
+      <source src="/search-vid.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
   <div class="container my-5 px-4 pb-4">
     <div class="row d-flex justify-content-center align-items-center">
       <div>
-        <h1>Explore</h1>
+        <h1>Explore Now</h1>
         <form method="get" action="<%= activities_path %>" class="mb-4">
           <div>
             <!-- Search keyword -->
             <div class="col-md-12 col-sm-12">
-              <input type="text" class="form-control" id="search-bar" name="search" placeholder="Search by keywords..." aria-label="Search activities" value="<%= params[:search] %>">
+              <input type="text" class="form-control" id="search-bar" name="search" placeholder="Search adventures..." aria-label="Search activities" value="<%= params[:search] %>">
             </div>
 
             <!-- Date filter dropdown -->
@@ -24,7 +32,7 @@
             <!-- Filter by category -->
             <div class="col-lg-4 col-sm-4">
               <select class="form-select-activity" name="category">
-                <option value="">Activity Category</option>
+                <option value="">Category</option>
                 <option value="basketball" <%= 'selected' if params[:category] == 'basketball' %>>Basketball</option>
                 <option value="tennis" <%= 'selected' if params[:category] == 'tennis' %>>Tennis</option>
                 <option value="hike" <%= 'selected' if params[:category] == 'hike' %>>Hike</option>
@@ -44,15 +52,6 @@
                 <option value="paid" <%= 'selected' if params[:price] == 'paid' %>>Paid</option>
               </select>
             </div>
-          </div>
-        </div>
-
-          <div class="row g-1 mt-2">
-            <div class="d-flex flex-row">
-            <!-- Location input -->
-            <div class="col-9">
-              <input type="text" class="form-control" name="location" placeholder="Search by location" aria-label="Search by location" value="<%= params[:location] %>">
-            </div>
 
             <!-- Sort by options -->
             <div class="col-3">
@@ -63,9 +62,24 @@
               </select>
             </div>
           </div>
+        </div>
+
+
+          <div class="row g-1">
+            <div class="d-flex flex-row">
+            <!-- Location input -->
+            <div class="col-9">
+              <input type="text" class="form-control" name="location" placeholder="📍 Search by location" aria-label="Search by location" value="<%= params[:location] %>">
+            </div>
+
+            <div>
+              <p class="results"> <%= @activities.count %> results </p>
+            </div>
+
+          </div>
           </div>
 
-          <div class="row g-1 mt-3">
+          <div class="row g-1">
             <!-- Submit button -->
             <div class="col-md-6 col-sm-4 offset-md-3 offset-sm-4">
               <button class="btn btn-dark w-100" type="submit">
