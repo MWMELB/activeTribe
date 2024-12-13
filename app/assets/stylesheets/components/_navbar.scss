@@ -24,10 +24,10 @@ body {
 }
 
 
-#navbarDropdown {
-  position: relative;
+.navbar-nav .dropdown-menu  {
+  position: absolute;
 }
 
-.container-fluid {
-  position: fixed;
+.navbar-nav .nav-item {
+  position: relative;
 }

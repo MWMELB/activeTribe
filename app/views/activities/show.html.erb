@@ -101,7 +101,7 @@
 
 <div class="activity-photo-container my-3">
   <% if @activity.photo.attached? %>
-    <%= image_tag @activity.photo, class: "activity-card-image" %>
+    <%= cl_image_tag @activity.photo.key, class: "activity-card-image" %>
   <% else %>
     <p class="text-center text-muted">No photo available</p>
   <% end %>

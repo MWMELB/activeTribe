@@ -64,10 +64,11 @@ activities.each_with_index do |activity, index|
     capacity: activity_capacity.sample,
     level: rand(0..2)
   )
-  Booking.create(user: owner, activity: new_activity, status: :Accepted)
   new_activity.photo.attach(io: file, filename: "#{activity}.jpg", content_type: "image/png")
   new_activity.save
   file.close
+
+  Booking.create(user: owner, activity: new_activity, status: :Accepted)
 
   if index.odd?
     puts "Creating group #{index}"
@@ -78,10 +79,11 @@ activities.each_with_index do |activity, index|
       name: "#{Faker::Team.creature} #{activity} club",
       description: "We love #{activity} 🤩 #{Faker::Lorem.paragraph(sentence_count: 5)}"
     )
-    GroupUser.create(user: owner, group: new_group)
     new_group.photo.attach(io: file, filename: "#{activity}-2.jpg", content_type: "image/png")
     new_group.save
     file.close
+
+    GroupUser.create(user: owner, group: new_group)
   end
 end
 

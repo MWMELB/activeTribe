@@ -25,7 +25,7 @@
 
 <div class="my-3">
   <% if @group.photo.attached? %>
-    <%= image_tag @group.photo, class: "group-banner-image" %>
+    <%= cl_image_tag @group.photo, class: "group-banner-image" %>
   <% end %>
 </div>
 
