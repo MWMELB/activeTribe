@@ -25,7 +25,7 @@
 
 <div class="my-3">
   <% if @group.photo.attached? %>
-    <%= image_tag @group.photo, class: "group-banner-image" %>
+    <%= cl_image_tag @group.photo.key, class: "group-banner-image" %>
   <% end %>
 </div>
 
@@ -70,7 +70,7 @@
           <div class="card mb-3">
             <div class="card-body post">
               <div class="d-flex justify-content-between">
-                <p><strong><%= "#{post.user.first_name.capitalize} #{post.user.last_name.capitalize}"%></strong> · <%= time_ago_in_words(post.created_at) %> ago</p>
+                <p><strong><%= link_to "#{post.user.first_name.capitalize} #{post.user.last_name.capitalize}", user_profile_path(post.user.username) %></strong> · <%= time_ago_in_words(post.created_at) %> ago</p>
                 <% if post.user == current_user %>
                   <%= link_to '<i class="fa-regular fa-trash-can post-delete"></i>'.html_safe, group_group_post_path(@group, post), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this comment?"} %>
                 <% end %>

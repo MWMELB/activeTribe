@@ -40,3 +40,7 @@
 *.swp
 .DS_Store
 .env*
+
+
+# Ignore the large video
+public/create-vid.mp4

@@ -3,6 +3,7 @@
         <div class=""><%= link_to '<i class="icon fa-solid fa-angle-left back-icon"></i>'.html_safe, :back %></div>
         <h1 class="text-center mb-4">My Bookings</h1>
       </div>
+
   <% if @bookings.any? %>
     <% @bookings.each do |booking| %>
       <div class="card mb-4">
