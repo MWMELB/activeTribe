@@ -162,7 +162,7 @@ file_path = Rails.root.join("app/assets/images/anti-tinder.jpg")
 file = File.open(file_path)
 anti_tindr_group = Group.create(
   user: User.first,
-  name: "Anti-tinder run club",
+  name: "Anti-tinder run club ",
   description: "We love running! 🤩 Not tinder through 👹 #{Faker::Lorem.paragraph(sentence_count: 5)}"
 )
 anti_tindr_group.photo.attach(io: file, filename: "anti-tinder.jpg", content_type: "image/png")
