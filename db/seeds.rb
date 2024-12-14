@@ -103,7 +103,7 @@ activities.each_with_index do |activity, index|
     # Duration range from 15min to 2hrs
     duration: rand(1..8) * 15,
     # Price range from free to $100
-    price: rand(0..20) * 5,
+    price: rand(0..6) * 5,
     # Capacity range from 10 to unlimited
     capacity: activity_capacity.sample,
     level: rand(0..2)
