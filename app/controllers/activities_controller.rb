@@ -80,10 +80,10 @@ end
   def create
     @activity = Activity.new(activity_params)
     @activity.user = current_user
-    @booking = Booking.create(activity: @activity, user: current_user)
 
     authorize @activity
     if @activity.save
+      @booking = Booking.create(activity: @activity, user: current_user)
       flash[:notice] = "Activity created successfully!"
       redirect_to activity_path(@activity)
     else
