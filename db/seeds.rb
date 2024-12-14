@@ -6,6 +6,12 @@ GroupComment.destroy_all
 puts "Emptying GROUP_POSTS database..."
 GroupPost.destroy_all
 
+puts "Emptying ACTIVITY_COMMENTS database..."
+ActivityComment.destroy_all
+
+puts "Emptying ACTIVITY_POSTS database..."
+ActivityPost.destroy_all
+
 puts "Emptying GROUP_USERS database..."
 GroupUser.destroy_all
 
@@ -18,23 +24,28 @@ Activity.destroy_all
 puts "Emptying USERS database..."
 User.destroy_all
 
-puts "Creating 5 users..."
-for i in 1..5 do
-  puts "Creating user #{i}"
-  first = Faker::Name.first_name
-  last = Faker::Name.last_name
-  User.create(
-    first_name: first.downcase,
-    last_name: last.downcase,
-    username: "#{first.downcase}_#{last.downcase}",
-    birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
-    email: "user#{i}@gmail.com",
-    password: "password",
-    terms: true
-  )
-end
+# puts "Creating 5 users..."
+# for i in 1..5 do
+puts "Creating user Ivy Ta"
+first = "ivy"
+last = "ta"
+file_path = Rails.root.join("app/assets/images/ivy.jpg")
+file = File.open(file_path)
+ivy = User.create(
+  first_name: "Ivy",
+  last_name: "Ta",
+  username: "#{first.downcase}_#{last.downcase}",
+  birth_date: Faker::Date.birthday(min_age: 18, max_age: 65),
+  email: "ivy@gmail.com",
+  password: "password",
+  terms: true
+)
+ivy.photo.attach(io: file, filename: "ivy.jpg", content_type: "image/png")
+ivy.save
+file.close
+# end
 
-puts "Creating 5 activities..."
+puts "Creating 6 activities..."
 users = User.all
 melb_locations = ["Carlton, Victoria", "Southbank, Victoria", "Melbourne, Victoria", "Docklands, Victoria", "Fitzroy, Victoria"]
 activity_capacity = [10, 15, 20, 30]
@@ -64,10 +75,11 @@ activities.each_with_index do |activity, index|
     capacity: activity_capacity.sample,
     level: rand(0..2)
   )
-  Booking.create(user: owner, activity: new_activity, status: :Accepted)
   new_activity.photo.attach(io: file, filename: "#{activity}.jpg", content_type: "image/png")
   new_activity.save
   file.close
+
+  Booking.create(user: owner, activity: new_activity, status: :Accepted)
 
   if index.odd?
     puts "Creating group #{index}"
@@ -78,10 +90,11 @@ activities.each_with_index do |activity, index|
       name: "#{Faker::Team.creature} #{activity} club",
       description: "We love #{activity} 🤩 #{Faker::Lorem.paragraph(sentence_count: 5)}"
     )
-    GroupUser.create(user: owner, group: new_group)
     new_group.photo.attach(io: file, filename: "#{activity}-2.jpg", content_type: "image/png")
     new_group.save
     file.close
+
+    GroupUser.create(user: owner, group: new_group)
   end
 end
 

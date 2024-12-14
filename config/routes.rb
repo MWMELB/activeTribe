@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   # USER PAGES
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   get '/:username/activities', to: 'activities#my_activities', as: :my_activities
   get '/:username/groups', to: 'group_users#index', as: :my_groups
   get '/:username/profile', to: 'users#show', as: :user_profile

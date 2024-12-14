@@ -37,12 +37,16 @@ class ActivityPolicy < ApplicationPolicy
     user.present?
   end
 
+  def participant?
+    record.bookers.include?(user) || owner?
+  end
+
   def post?
-    user.present? && (record.bookers.include?(user) || owner?)
+    participant?
   end
 
   def comment?
-    post?
+    participant?
   end
 
   class Scope < ApplicationPolicy::Scope

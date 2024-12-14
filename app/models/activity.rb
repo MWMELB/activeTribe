@@ -5,6 +5,10 @@ class Activity < ApplicationRecord
   has_many :bookers, through: :bookings, source: :user
   has_one_attached :photo
   validates :title, :category, :description, :location, :start, :duration, :price, :capacity, :level, presence: true
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :duration, numericality: { only_integer: true, greater_than: 0 }
+  validates :capacity, numericality: { only_integer: true, greater_than: 0 }
+
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 

@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :destroy]
+
   def index
     @groups = policy_scope(Group)
     if params[:query].present?
