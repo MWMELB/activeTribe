@@ -195,7 +195,7 @@
     <div id="map" style="height: 400px; width: 100%;"></div>
   </div>
 
-  <p class="card-text text-end"><strong>Organized by:</strong> <%= @activity.user.first_name.capitalize %></p>
+  <p class="card-text text-end"><strong>Organized by:</strong> <%= link_to @activity.user.first_name.capitalize, user_profile_path(@activity.user.username) %></p>
 </div>
 
 

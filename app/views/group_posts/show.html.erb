@@ -13,7 +13,7 @@
       <div class="card mb-3">
         <div class="card-body">
           <div class="content mb-3">
-            <strong class=><%= "#{comment.user.first_name.capitalize} #{comment.user.last_name.capitalize}" %>:</strong> <%= comment.content %>
+            <strong class=><%= link_to "#{comment.user.first_name.capitalize} #{comment.user.last_name.capitalize}", user_profile_path(comment.user.username) %>:</strong> <%= comment.content %>
           </div>
           <div class="d-flex justify-content-between">
             <small><%= time_ago_in_words(comment.created_at) %> ago</small>
